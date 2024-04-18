@@ -22,11 +22,6 @@ type FormValues = {
   password: string
 }
 
-type OtherFormProps = {
-  title?: string
-  ref?: unknown
-}
-
 const LoginPage: React.FC = () => {
   const handleSubmit = async (
     values: FormValues,
@@ -57,7 +52,7 @@ const LoginPage: React.FC = () => {
               return (
                 <Form>
                   <div className="my-4">
-                    <Label htmlFor="picture">Username</Label>
+                    <Label htmlFor="username">Username</Label>
                     <Input
                       type="text"
                       name="username"
@@ -67,7 +62,7 @@ const LoginPage: React.FC = () => {
                     />
                   </div>
                   <div className="my-4">
-                    <Label htmlFor="picture">Password</Label>
+                    <Label htmlFor="password">Password</Label>
                     <Input
                       type="password"
                       name="password"
