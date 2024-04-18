@@ -11,11 +11,9 @@ import {
   DialogTrigger
 } from '../../components/ui/dialog'
 import { Button } from '../../components/ui/button'
-import { Form, Formik, FormikHelpers } from 'formik'
+import { Form, Formik } from 'formik'
 import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
-
-type LoginPageProps = null
 
 type FormValues = {
   username: string
@@ -24,8 +22,8 @@ type FormValues = {
 
 const LoginPage: React.FC = () => {
   const handleSubmit = async (
-    values: FormValues,
-    formikHelpers: FormikHelpers<FormValues>
+    values: FormValues
+    // formikHelpers: FormikHelpers<FormValues>
   ) => {
     // handle call api to submit form
     console.log('values: ', values)
