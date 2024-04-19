@@ -24,7 +24,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     }
   }
   return (
-    <div className="flex items-center justify-between sm:px-12 px-2 md:px-24">
+    <div className="flex items-center justify-between px-2 md:px-12">
       <Link href="/" className="flex items-center justify-center h-20">
         Stuck Overflow
       </Link>
