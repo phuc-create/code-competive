@@ -46,7 +46,6 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
     notFound()
   }
   const { problem: prob } = problem
-  console.log(prob)
   return (
     <div className="px-10 w-full h-full">
       <ResizablePanelGroup
