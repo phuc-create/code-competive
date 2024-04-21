@@ -1,7 +1,6 @@
 'use client'
 import {
   ColumnDef,
-  RowModel,
   useReactTable,
   getCoreRowModel,
   ColumnFiltersState,

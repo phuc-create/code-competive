@@ -24,10 +24,24 @@ const NavBar: React.FC<NavBarProps> = () => {
     }
   }
   return (
-    <div className="flex items-center justify-between px-2 md:px-12">
-      <Link href="/" className="flex items-center justify-center h-20">
-        Stuck Overflow
-      </Link>
+    <div className="flex items-center justify-between px-2 md:px-12 mt-4 md:mt-2">
+      <div className="flex gap-8 justify-center">
+        <Link
+          href="/"
+          className="flex items-center font-semibold justify-center p-3 rounded-md gap-1 bg-primary/100"
+        >
+          <span className="text-red-700 ">Stuck </span>{' '}
+          <span className="dark:text-black text-white">Overflow</span>
+        </Link>
+        <div className="flex gap-2 justify-center items-center">
+          <Link
+            href="/problems"
+            className="flex items-center justify-center p-2 rounded-md transition ease-in-out duration-300 hover:bg-primary/5"
+          >
+            Problems
+          </Link>
+        </div>
+      </div>
       <div className="flex items-center gap-2">
         {user ? (
           <UserNav

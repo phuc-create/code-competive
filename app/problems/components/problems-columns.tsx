@@ -1,10 +1,11 @@
 'use client'
 import React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
-import { MockSeedType } from '../data/seed'
-import TableColumnHeader from './table-column-header'
-import { priorities, statuses } from '../data/data'
 import { useRouter } from 'next/navigation'
+import TableColumnHeader from '../../components/table-column-header'
+import { Problem } from '../stores/problem-types'
+import { levels, statuses } from '../constants'
+import { Badge } from '../../../components/ui/badge'
 interface CustomInteractiveProps {
   link?: string
   children?: React.ReactNode
@@ -23,21 +24,28 @@ const CustomInteractive: React.FC<CustomInteractiveProps> = ({
     </div>
   )
 }
-const columns: ColumnDef<MockSeedType>[] = [
+const columns: ColumnDef<Problem>[] = [
   {
     accessorKey: 'id',
-    header: ({ column }) => <TableColumnHeader column={column} title="" />,
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
+    header: ({ column }) => <TableColumnHeader column={column} title="Tag." />,
+    cell: ({ row }) => <Badge variant={'outline'}>{row.getValue('id')}</Badge>,
+    enableSorting: false,
+    enableHiding: true
+  },
+  {
+    accessorKey: 'number',
+    header: ({ column }) => <TableColumnHeader column={column} title="No." />,
+    cell: ({ row }) => <div className="w-[80px]">{row.getValue('number')}</div>,
     enableSorting: false,
     enableHiding: false
   },
   {
     accessorKey: 'title',
-    header: ({ column }) => <TableColumnHeader column={column} title="Title" />,
+    header: ({ column }) => <TableColumnHeader column={column} title="Name" />,
     cell: ({ row }) => {
       return (
         <CustomInteractive link={`problems/${row.getValue('id')}`}>
-          {row.getValue('title')}
+          {row.getValue('number') + '. ' + row.getValue('title')}
         </CustomInteractive>
       )
     }
@@ -61,21 +69,16 @@ const columns: ColumnDef<MockSeedType>[] = [
     }
   },
   {
-    accessorKey: 'priority',
+    accessorKey: 'level',
     header: ({ column }) => (
-      <TableColumnHeader column={column} title="Priority" />
+      <TableColumnHeader column={column} title="Difficulty" />
     ),
     cell: ({ row }) => {
-      const priority = priorities.find(
-        p => p.value === row.getValue('priority')
-      )
-      if (!priority) return null
+      const level = levels.find(p => p.value === row.getValue('level'))
+      if (!level) return null
       return (
         <div className="flex w-[100px] items-center">
-          {priority.icon && (
-            <priority.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{priority.label}</span>
+          <Badge variant={level.value || 'outline'}>{level.label}</Badge>
         </div>
       )
     }

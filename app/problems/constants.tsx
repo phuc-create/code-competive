@@ -1,29 +1,10 @@
 import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
   CheckCircledIcon,
   CircleIcon,
   CrossCircledIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon
 } from '@radix-ui/react-icons'
-
-export const labels = [
-  {
-    value: 'bug',
-    label: 'Bug'
-  },
-  {
-    value: 'feature',
-    label: 'Feature'
-  },
-  {
-    value: 'documentation',
-    label: 'Documentation'
-  }
-]
-
 export const statuses = [
   {
     value: 'backlog',
@@ -51,21 +32,24 @@ export const statuses = [
     icon: CrossCircledIcon
   }
 ]
-
-export const priorities = [
+type Level = {
+  label: string
+  value: 'easy' | 'medium' | 'hard'
+}
+export const levels: Level[] = [
   {
     label: 'Easy',
-    value: 'Easy',
-    icon: ArrowDownIcon
+    value: 'easy'
+    // icon: <Badge variant="easy">Easy</Badge>
   },
   {
     label: 'Medium',
-    value: 'medium',
-    icon: ArrowRightIcon
+    value: 'medium'
+    // icon: <Badge variant="medium">Medium</Badge>
   },
   {
-    label: 'High',
-    value: 'high',
-    icon: ArrowUpIcon
+    label: 'Hard',
+    value: 'hard'
+    // icon: <Badge variant="hard">Hard</Badge>
   }
 ]

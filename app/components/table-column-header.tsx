@@ -1,5 +1,5 @@
-import { Column, ColumnDef } from '@tanstack/react-table'
 import React from 'react'
+import { Column } from '@tanstack/react-table'
 import {
   DropdownMenu,
   DropdownMenuContent,
