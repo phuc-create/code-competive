@@ -15,8 +15,8 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = () => {
   const router = useRouter()
-  const [user, loading, error] = useAuthState(auth)
-  const [signOut, signOutLoading, logOutError] = useSignOut(auth)
+  const [user] = useAuthState(auth)
+  const [signOut, signOutLoading] = useSignOut(auth)
   const handleLogout = async () => {
     const success = await signOut()
     if (success) {
@@ -24,7 +24,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     }
   }
   return (
-    <div className="flex items-center justify-between px-2 md:px-12 mt-4 md:mt-2">
+    <div className="flex items-center justify-between px-2 md:px-12 md:pt-2">
       <div className="flex gap-8 justify-center">
         <Link
           href="/"

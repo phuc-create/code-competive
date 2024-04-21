@@ -1,15 +1,17 @@
 import React from 'react'
 
-import Playground from './components/playground'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup
 } from '../../../components/ui/resizable'
+import Playground from './components/playground'
 import DescriptionsPage from './components/descriptions'
+import TestCasesPage from './components/test-cases'
 import { problemsBasepathMock } from '../stores/problems'
 import { Problem } from '../stores/problem-types'
 import { notFound } from 'next/navigation'
+
 type ProblemPageProps = {
   params: {
     id: string
@@ -46,22 +48,27 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
   const { problem: prob } = problem
   console.log(prob)
   return (
-    <div className="px-12 w-full h-full">
-      <ResizablePanelGroup direction="horizontal" className="w-full border">
-        <ResizablePanel className="p-2 border-none h-[calc(100vh-58px)]">
+    <div className="px-10 w-full h-full">
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="w-full border-none"
+      >
+        <ResizablePanel className="p-2 h-[calc(100vh-74px)]">
           <DescriptionsPage
             title={prob.number + '. ' + prob.title}
             problem={prob}
           />
         </ResizablePanel>
-        <ResizableHandle withHandle />
+        <ResizableHandle withHandle className="bg-transparent" />
         <ResizablePanel className="border-none">
-          <ResizablePanelGroup direction="vertical" className="border-none">
-            <ResizablePanel className="p-2 border-none">
+          <ResizablePanelGroup direction="vertical">
+            <ResizablePanel className="p-2">
               <Playground language={'typescript'} code={prob.templateCode} />
             </ResizablePanel>
-            <ResizableHandle withHandle />
-            <ResizablePanel>Where I put my test case down</ResizablePanel>
+            <ResizableHandle withHandle className="bg-transparent" />
+            <ResizablePanel className="p-2">
+              <TestCasesPage cases={prob.examples} />
+            </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
       </ResizablePanelGroup>
