@@ -10,8 +10,10 @@ export type InAndOut =
 
 export type Example = {
   id: string
+  var_name: string[]
   input: InAndOut[]
   output: InAndOut
+  explaination?: string
 }
 
 export type Constraints = {

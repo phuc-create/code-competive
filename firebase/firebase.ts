@@ -1,7 +1,7 @@
 'use client'
 // Import the functions you need from the SDKs you need
 import { getApps, getApp, initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
+import { getAnalytics, isSupported } from 'firebase/analytics'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,8 +21,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = !getApps.length ? initializeApp(firebaseConfig) : getApp()
-const analytics = getAnalytics(app)
+const analytics = isSupported().then(yes => (yes ? getAnalytics(app) : null))
+
 const auth = getAuth(app)
 const fireStore = getFirestore(app)
 
-export { app, auth, fireStore }
+export { app, auth, fireStore, analytics }

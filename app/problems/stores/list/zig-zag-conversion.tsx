@@ -6,12 +6,16 @@ const problemDescription = (
       a given number of rows like this: (you may want to display this pattern in
       a fixed font for better legibility)
     </p>
+    <br />
     {/* eslint-disable-next-line prettier/prettier */}
       <pre>
-      P   A   H   N
-      A P L S I I G 
-      Y   I   R
-      </pre>
+      {/* eslint-disable-next-line prettier/prettier */}
+      <pre>P   A   H   N</pre>
+      <pre>A P L S I I G </pre>
+      {/* eslint-disable-next-line prettier/prettier */}
+      <pre>Y   I   R</pre>
+    </pre>
+    <br />
     <p>
       And then read line by line: <code>"PAHNAPLSIIGYIR"</code>
     </p>
@@ -19,6 +23,7 @@ const problemDescription = (
       Write the code that will take a string and make this conversion given a
       number of rows:
     </p>
+    <br />
     <pre>string convert(string s, int numRows);</pre>
   </>
 )
@@ -26,16 +31,19 @@ const problemDescription = (
 const problemExamples: Example[] = [
   {
     id: 'ex-1',
+    var_name: ['s', 'numRows'],
     input: ['PAYPALISHIRING', 3],
     output: 'PAHNAPLSIIGYIR'
   },
   {
     id: 'ex-2',
+    var_name: ['s', 'numRows'],
     input: ['PAYPALISHIRING', 4],
     output: 'PINALSIGYAHRPI'
   },
   {
     id: 'ex-3',
+    var_name: ['s', 'numRows'],
     input: ['A', 1],
     output: 'A'
   }

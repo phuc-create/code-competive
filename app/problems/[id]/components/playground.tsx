@@ -1,3 +1,4 @@
+'use client'
 import { Editor } from '@monaco-editor/react'
 import { Code2 } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -21,6 +22,7 @@ const Playground: React.FC<PlaygroundProps> = ({ code, language }) => {
         <Editor
           className="overflow-hidden"
           height={'90vh'}
+          value={code}
           language={language}
           theme={theme === 'dark' ? 'vs-dark' : theme}
           defaultLanguage="typescript"
