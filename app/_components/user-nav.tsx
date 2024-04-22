@@ -11,9 +11,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@code/components/ui/dropdown-menu'
-import Spinner from './spinner'
 import { User } from '@supabase/supabase-js'
 import { logOut } from '../../supabase/requests/auth'
+import { useRouter } from 'next/navigation'
+import Router from 'next/router'
+import { useEffect, useState } from 'react'
 
 interface UserNavProps {
   user: User | null
@@ -24,12 +26,20 @@ export const UserNav: React.FC<UserNavProps> = ({
   user
   // signOutLoading
 }) => {
+  const router = useRouter()
+  const [userProfile, setUserProfile] = useState<User | null>(user)
+  useEffect(() => {
+    setUserProfile(() => user)
+  }, [user])
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            {/* <AvatarImage src={user?.identities || ''} alt="user picture" /> */}
+            <AvatarImage
+              src={userProfile?.user_metadata?.picture || ''}
+              alt="user picture"
+            />
             <AvatarFallback>SC</AvatarFallback>
           </Avatar>
         </Button>
@@ -41,7 +51,7 @@ export const UserNav: React.FC<UserNavProps> = ({
               {/* {user?.displayName || ''} */}
             </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {user?.email || ''}
+              {userProfile?.email || ''}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -62,7 +72,13 @@ export const UserNav: React.FC<UserNavProps> = ({
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logOut}>
+        <DropdownMenuItem
+          onClick={() => {
+            logOut()
+            router.refresh()
+            router.refresh()
+          }}
+        >
           {'Log out'}
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

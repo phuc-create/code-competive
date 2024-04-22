@@ -1,4 +1,3 @@
-import { createSupabaseServerClient } from '../supabaseServer'
 import { redirect } from 'next/navigation'
 import { createSupabaseBrowerClient } from '../supabaseClient'
 
@@ -27,16 +26,12 @@ const loginWithGoogle = async () => {
       redirectTo: `${origin}/problems/callback`
     }
   })
-  console.log('loggginggggggg in : ', data)
-  console.log('ERROR WHEN LOGGING IN :', error)
-  // if (data.url) {
-  //   redirect(data.url) // use the redirect API for your server framework
-  // }
 }
 
 const logOut = async () => {
   const supabase = createSupabaseBrowerClient()
-  const { error } = await supabase.auth.signOut()
+  const { error } = await supabase.auth.signOut({})
+  if (error) console.log(error)
 }
 
 export { loginWithGoogle, logOut }

@@ -16,7 +16,6 @@ import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
 import Seperator from './seperator'
 import { Icons } from '../../icons/icons'
-import Spinner from './spinner'
 import LogInWithGoogleBtn from './login-with-google-btn'
 
 type FormValues = {

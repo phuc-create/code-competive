@@ -1,9 +1,8 @@
 'use client'
 import React from 'react'
 import { Button } from '../../components/ui/button'
-// import { loginWithGoogle } from '../../supabase/requests/auth'
-import { Icons } from '../../icons/icons'
 import { loginWithGoogle } from '../../supabase/requests/auth'
+import { Icons } from '../../icons/icons'
 
 const LogInWithGoogleBtn = () => {
   return (
