@@ -6,7 +6,6 @@ import LoginPage from './login'
 // import { useAuthState } from 'react-firebase-hooks/auth'
 // import { auth } from '../../firebase/firebase'
 import { UserNav } from './user-nav'
-import { logOut } from '../../supabase/requests/auth'
 import { getUserCredentials } from '../../supabase/requests/user'
 import { createSupabaseServerClient } from '../../supabase/supabaseServer'
 import { redirect } from 'next/navigation'
@@ -16,17 +15,17 @@ type NavBarProps = {
 }
 
 const NavBar = async () => {
-  const data = await getUserCredentials()
+  const { user } = await getUserCredentials()
   // const supabase = createSupabaseServerClient()
 
   // const { data, error } = await supabase.auth.getUser()
   // if (error || !data?.user) {
   //   redirect('/')
   // }
-  console.log(data)
+  console.log(user)
   return (
     <div className="flex items-center justify-between px-2 md:px-12 md:pt-2">
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
       <div className="flex gap-8 justify-center">
         <Link
           href="/"
@@ -45,8 +44,8 @@ const NavBar = async () => {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {data ? (
-          <UserNav user={data.user} />
+        {user ? (
+          <UserNav user={user} />
         ) : (
           <>
             <SignUpPage />
