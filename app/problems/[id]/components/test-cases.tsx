@@ -16,7 +16,7 @@ const TestCasesPage: React.FC<TestCasesPageProps> = ({ cases }) => {
   // const cases =
   return (
     <div className="rounded-md relative w-full h-full border overflow-hidden p-4">
-      <Tabs defaultValue={cases[0].id} className="w-[400px]">
+      <Tabs defaultValue={cases[0].id}>
         <TabsList>
           {cases.map((c, i) => (
             <TabsTrigger key={c.id} value={c.id}>
@@ -25,7 +25,7 @@ const TestCasesPage: React.FC<TestCasesPageProps> = ({ cases }) => {
           ))}
         </TabsList>
 
-        {cases.map((c, i) => {
+        {cases.map(c => {
           const { var_name, input } = c
           const testcases = var_name.map((varName, i) => ({
             id: i,

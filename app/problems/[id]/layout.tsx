@@ -10,9 +10,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <div className="max-w-screen-2xl m-0 p-0 h-full flex flex-col gap-y-4">
-      {children}
-    </div>
-  )
+  return <div className="m-0 p-0 h-full flex flex-col gap-y-4">{children}</div>
 }

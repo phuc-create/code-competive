@@ -26,7 +26,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="max-w-screen-2xl m-0 p-0 h-full flex flex-col gap-y-4">
+          <div className="w-full m-0 p-0 h-full flex flex-col gap-y-4">
             <NavBar />
             <AuthenticationProvider>{children}</AuthenticationProvider>
           </div>

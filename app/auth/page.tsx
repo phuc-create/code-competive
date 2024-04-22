@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../firebase/firebase'
 import { useRouter } from 'next/navigation'
+import { Icons } from '../../icons/icons'
 
 type AuthPageProps = {
   string?: string
@@ -17,7 +18,11 @@ const AuthPage: React.FC<AuthPageProps> = () => {
     }
   }, [user, router])
   if (loading) {
-    return 'Authenticating...'
+    return (
+      <div className="flex m-auto w-full h-full items-center justify-center">
+        <Icons.spinner />
+      </div>
+    )
   }
   if (error) {
     console.log(error)
