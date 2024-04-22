@@ -1,3 +1,4 @@
+'use client'
 import { Avatar, AvatarFallback, AvatarImage } from '@code/components/ui/avatar'
 import { Button } from '@code/components/ui/button'
 import {
@@ -10,26 +11,25 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@code/components/ui/dropdown-menu'
-import { User } from 'firebase/auth'
 import Spinner from './spinner'
+import { User } from '@supabase/supabase-js'
+import { logOut } from '../../supabase/requests/auth'
 
 interface UserNavProps {
-  user?: User | null
-  handleLogout: () => void
-  signOutLoading: boolean
+  user: User | null
+  // signOutLoading: boolean
 }
 
 export const UserNav: React.FC<UserNavProps> = ({
-  user,
-  handleLogout,
-  signOutLoading
+  user
+  // signOutLoading
 }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user?.photoURL || ''} alt="user picture" />
+            {/* <AvatarImage src={user?.identities || ''} alt="user picture" /> */}
             <AvatarFallback>SC</AvatarFallback>
           </Avatar>
         </Button>
@@ -38,7 +38,7 @@ export const UserNav: React.FC<UserNavProps> = ({
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">
-              {user?.displayName || ''}
+              {/* {user?.displayName || ''} */}
             </p>
             <p className="text-xs leading-none text-muted-foreground">
               {user?.email || ''}
@@ -62,8 +62,8 @@ export const UserNav: React.FC<UserNavProps> = ({
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout}>
-          {signOutLoading ? <Spinner /> : 'Log out'}
+        <DropdownMenuItem onClick={logOut}>
+          {'Log out'}
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

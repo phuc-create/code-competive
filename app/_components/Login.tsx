@@ -16,9 +16,8 @@ import { Input } from '../../components/ui/input'
 import { Label } from '../../components/ui/label'
 import Seperator from './seperator'
 import { Icons } from '../../icons/icons'
-import { auth } from '@code/firebase/firebase'
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import Spinner from './spinner'
+import LogInWithGoogleBtn from './login-with-google-btn'
 
 type FormValues = {
   username: string
@@ -26,7 +25,6 @@ type FormValues = {
 }
 
 const LoginPage: React.FC = () => {
-  const [signInWithGoogle, , loading] = useSignInWithGoogle(auth)
   const handleSubmit = async (
     values: FormValues
     // formikHelpers: FormikHelpers<FormValues>
@@ -34,19 +32,14 @@ const LoginPage: React.FC = () => {
     // handle call api to submit form
     console.log('values: ', values)
   }
-  const handleSignInWithGoogle = async () => {
-    await signInWithGoogle()
-      .then()
-      .catch(err => console.log(JSON.stringify(err, null, 2)))
-  }
 
-  if (loading) {
-    return (
-      <Button>
-        <Spinner />
-      </Button>
-    )
-  }
+  // if (loading) {
+  //   return (
+  //     <Button>
+  //       <Spinner />
+  //     </Button>
+  //   )
+  // }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -108,10 +101,7 @@ const LoginPage: React.FC = () => {
               <Icons.gitHub className="mr-2 h-4 w-4" />
               Github
             </Button>
-            <Button variant="outline" onClick={handleSignInWithGoogle}>
-              <Icons.google className="mr-2 h-4 w-4" />
-              Google
-            </Button>
+            <LogInWithGoogleBtn />
           </div>
         </>
 
