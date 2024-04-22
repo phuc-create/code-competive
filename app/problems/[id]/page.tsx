@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 
 import {
   ResizableHandle,
@@ -11,19 +12,24 @@ import TestCasesPage from './components/test-cases'
 import { problemsBasepathMock } from '../stores/problems'
 import { Problem } from '../stores/problem-types'
 import { notFound } from 'next/navigation'
+// import { getUserCredentials } from '../../../supabase/requests/user'
+import Unauthorized from '../../unauthorized'
+import { User } from '@supabase/supabase-js'
+import { Icons } from '../../../icons/icons'
+import { createSupabaseBrowerClient } from '../../../supabase/supabaseClient'
 
 type ProblemPageProps = {
   params: {
     id: string
   }
 }
-export const generateStaticParams = async () => {
-  const problems = Object.keys(problemsBasepathMock).map(p => ({
-    id: p
-  }))
+// export const generateStaticParams = async () => {
+//   const problems = Object.keys(problemsBasepathMock).map(p => ({
+//     id: p
+//   }))
 
-  return problems
-}
+//   return problems
+// }
 
 const getProblem = (id: string): { problem: Problem | null } => {
   const problem = problemsBasepathMock[id]
@@ -41,9 +47,37 @@ const getProblem = (id: string): { problem: Problem | null } => {
 }
 
 const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
+  const [userProfile, setUserProfile] = useState<User | null>()
+  const [loading, setLoading] = useState(true)
+  // const { user } = await getUserCredentials()
   const problem = getProblem(params.id)
+
+  useEffect(() => {
+    const getUserCredentials = async () => {
+      const supabase = createSupabaseBrowerClient()
+      const { data } = await supabase.auth.getUser()
+      if (data.user) {
+        setUserProfile(() => data.user)
+      }
+      setLoading(false)
+    }
+    getUserCredentials()
+  }, [])
+
   if (!problem.problem) {
     notFound()
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-72px)] w-full">
+        <Icons.spinner />
+      </div>
+    )
+  }
+
+  if (!userProfile) {
+    return <Unauthorized />
   }
   const { problem: prob } = problem
   return (

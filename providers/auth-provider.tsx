@@ -1,21 +1,22 @@
+'use client'
 import { PropsWithChildren, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { notFound, redirect, useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase/firebase'
 import { Icons } from '../icons/icons'
 import { getUserCredentials } from '../supabase/requests/user'
+import { User } from '@supabase/supabase-js'
 
-const AuthenticationProvider: React.FC<PropsWithChildren> = async ({
-  children
-}) => {
-  // const router = useRouter()
+const AuthenticationProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const router = useRouter()
   // const supabaseUser = await getUserCredentials()
   // const [user, loading] = useAuthState(auth)
+
   // useEffect(() => {
-  //   if (!loading && !user) {
+  //   if (!user) {
   //     router.push('/problems')
   //   }
-  // }, [user, router, loading])
+  // }, [router, user])
   // if (loading) {
   //   return (
   //     <div className="flex m-auto w-full h-full items-center justify-center">
@@ -23,6 +24,7 @@ const AuthenticationProvider: React.FC<PropsWithChildren> = async ({
   //     </div>
   //   )
   // }
+  // if (!user) return notFound()
   return <>{children}</>
 }
 
