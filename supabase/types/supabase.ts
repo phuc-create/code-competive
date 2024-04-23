@@ -9,6 +9,105 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      problem_overview: {
+        Row: {
+          created_at: string
+          disliked: boolean | null
+          id: number
+          liked: boolean | null
+          problem_id: number | null
+          solutions: string[] | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          disliked?: boolean | null
+          id?: number
+          liked?: boolean | null
+          problem_id?: number | null
+          solutions?: string[] | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          disliked?: boolean | null
+          id?: number
+          liked?: boolean | null
+          problem_id?: number | null
+          solutions?: string[] | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_problem_overview_problem_id_fkey"
+            columns: ["problem_id"]
+            isOneToOne: true
+            referencedRelation: "problems"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_problem_overview_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      problems: {
+        Row: {
+          categories: string[] | null
+          constraints: Json | null
+          created_at: string
+          description: Json | null
+          dislikes: number | null
+          id: number
+          level: string | null
+          likes: number | null
+          name: string | null
+          number: number
+          starter_func_name: string | null
+          template_code: string | null
+          test_cases: Json | null
+          title: string | null
+        }
+        Insert: {
+          categories?: string[] | null
+          constraints?: Json | null
+          created_at?: string
+          description?: Json | null
+          dislikes?: number | null
+          id?: number
+          level?: string | null
+          likes?: number | null
+          name?: string | null
+          number?: number
+          starter_func_name?: string | null
+          template_code?: string | null
+          test_cases?: Json | null
+          title?: string | null
+        }
+        Update: {
+          categories?: string[] | null
+          constraints?: Json | null
+          created_at?: string
+          description?: Json | null
+          dislikes?: number | null
+          id?: number
+          level?: string | null
+          likes?: number | null
+          name?: string | null
+          number?: number
+          starter_func_name?: string | null
+          template_code?: string | null
+          test_cases?: Json | null
+          title?: string | null
+        }
+        Relationships: []
+      }
       user: {
         Row: {
           categories: string[] | null

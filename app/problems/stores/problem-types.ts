@@ -5,6 +5,7 @@ export type InAndOut =
   | number
   | Array<number>
   | Array<string>
+  | boolean
   | null
   | undefined
 

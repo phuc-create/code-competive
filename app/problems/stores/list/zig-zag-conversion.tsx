@@ -68,7 +68,7 @@ const problemConstraints: Constraints[] = [
     cons: <code>1 &lt;= numRows &lt;= 1000</code>
   }
 ]
-const problemTemplate = `const convert = () => {
+const problemTemplate = `const convert = (s:string, numRows: number) => {
   // write your code here
 }`
 export const zig_zag_conversion_problem: Problem = {
