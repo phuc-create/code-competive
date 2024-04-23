@@ -3,26 +3,11 @@ import React from 'react'
 import ModeToggle from './mode-toggle'
 import SignUpPage from './sign-up'
 import LoginPage from './login'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-// import { auth } from '../../firebase/firebase'
 import { UserNav } from './user-nav'
 import { getUserCredentials } from '../../supabase/requests/user'
-import { createSupabaseServerClient } from '../../supabase/supabaseServer'
-import { redirect } from 'next/navigation'
-
-type NavBarProps = {
-  children?: React.ReactNode
-}
 
 const NavBar = async () => {
   const { user } = await getUserCredentials()
-  // const supabase = createSupabaseServerClient()
-
-  // const { data, error } = await supabase.auth.getUser()
-  // if (error || !data?.user) {
-  //   redirect('/')
-  // }
-  console.log(user)
   return (
     <div className="flex items-center justify-between px-2 md:px-12 md:pt-2">
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
@@ -31,8 +16,8 @@ const NavBar = async () => {
           href="/"
           className="flex items-center font-semibold justify-center p-3 rounded-md gap-1 bg-primary/100"
         >
-          <span className="text-red-700 ">Stuck </span>{' '}
-          <span className="dark:text-black text-white">Overflow</span>
+          <span className="text-red-700 ">Solve </span>{' '}
+          <span className="dark:text-black text-white">It!</span>
         </Link>
         <div className="flex gap-2 justify-center items-center">
           <Link

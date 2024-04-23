@@ -3,9 +3,9 @@ import React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { useRouter } from 'next/navigation'
 import TableColumnHeader from '../../components/table-column-header'
-import { Problem } from '../stores/problem-types'
 import { levels, statuses } from '../constants'
 import { Badge } from '../../../components/ui/badge'
+import { TSBProblem } from '../../../supabase/squash-types'
 interface CustomInteractiveProps {
   link?: string
   children?: React.ReactNode
@@ -24,11 +24,20 @@ const CustomInteractive: React.FC<CustomInteractiveProps> = ({
     </div>
   )
 }
-const columns: ColumnDef<Problem>[] = [
+const columns: ColumnDef<TSBProblem>[] = [
   {
     accessorKey: 'id',
-    header: ({ column }) => <TableColumnHeader column={column} title="Tag." />,
+    header: ({ column }) => <TableColumnHeader column={column} title="ID." />,
     cell: ({ row }) => <Badge variant={'outline'}>{row.getValue('id')}</Badge>,
+    enableSorting: false,
+    enableHiding: true
+  },
+  {
+    accessorKey: 'name',
+    header: ({ column }) => <TableColumnHeader column={column} title="Sign" />,
+    cell: ({ row }) => (
+      <Badge variant={'outline'}>{row.getValue('name')}</Badge>
+    ),
     enableSorting: false,
     enableHiding: true
   },
@@ -41,10 +50,10 @@ const columns: ColumnDef<Problem>[] = [
   },
   {
     accessorKey: 'title',
-    header: ({ column }) => <TableColumnHeader column={column} title="Name" />,
+    header: ({ column }) => <TableColumnHeader column={column} title="Title" />,
     cell: ({ row }) => {
       return (
-        <CustomInteractive link={`problems/${row.getValue('id')}`}>
+        <CustomInteractive link={`problems/${row.getValue('name')}`}>
           {row.getValue('number') + '. ' + row.getValue('title')}
         </CustomInteractive>
       )

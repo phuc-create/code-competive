@@ -6,7 +6,7 @@ type ProblemBasePathMock = {
 }
 export const problems: Problem[] = [zig_zag_conversion_problem, starter_problem]
 
-export const problemsBasepathMock: ProblemBasePathMock = {
+export const problemsStore: ProblemBasePathMock = {
   'zig-zag-conversion': zig_zag_conversion_problem,
   'starter-problem': starter_problem
 }

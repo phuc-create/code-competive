@@ -48,24 +48,17 @@ export type Database = {
             referencedRelation: "problems"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "public_problem_overview_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: true
-            referencedRelation: "user"
-            referencedColumns: ["id"]
-          },
         ]
       }
       problems: {
         Row: {
           categories: string[] | null
-          constraints: Json | null
+          constraints: string[] | null
           created_at: string
-          description: Json | null
+          descriptions: string[] | null
           dislikes: number | null
           id: number
-          level: string | null
+          level: Database["public"]["Enums"]["levels"] | null
           likes: number | null
           name: string | null
           number: number
@@ -76,12 +69,12 @@ export type Database = {
         }
         Insert: {
           categories?: string[] | null
-          constraints?: Json | null
+          constraints?: string[] | null
           created_at?: string
-          description?: Json | null
+          descriptions?: string[] | null
           dislikes?: number | null
           id?: number
-          level?: string | null
+          level?: Database["public"]["Enums"]["levels"] | null
           likes?: number | null
           name?: string | null
           number?: number
@@ -92,12 +85,12 @@ export type Database = {
         }
         Update: {
           categories?: string[] | null
-          constraints?: Json | null
+          constraints?: string[] | null
           created_at?: string
-          description?: Json | null
+          descriptions?: string[] | null
           dislikes?: number | null
           id?: number
-          level?: string | null
+          level?: Database["public"]["Enums"]["levels"] | null
           likes?: number | null
           name?: string | null
           number?: number
@@ -108,44 +101,37 @@ export type Database = {
         }
         Relationships: []
       }
-      user: {
+      users: {
         Row: {
-          categories: string[] | null
-          created_at: string
-          dislikes: number | null
+          email: string | null
           id: string
-          level: string | null
-          likes: number | null
-          link: string | null
-          number: number
-          title: string | null
-          updated_at: string | null
+          name: string | null
+          picture: string | null
+          user_id: string | null
         }
         Insert: {
-          categories?: string[] | null
-          created_at?: string
-          dislikes?: number | null
+          email?: string | null
           id?: string
-          level?: string | null
-          likes?: number | null
-          link?: string | null
-          number?: number
-          title?: string | null
-          updated_at?: string | null
+          name?: string | null
+          picture?: string | null
+          user_id?: string | null
         }
         Update: {
-          categories?: string[] | null
-          created_at?: string
-          dislikes?: number | null
+          email?: string | null
           id?: string
-          level?: string | null
-          likes?: number | null
-          link?: string | null
-          number?: number
-          title?: string | null
-          updated_at?: string | null
+          name?: string | null
+          picture?: string | null
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "public_users_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -155,7 +141,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      levels: "easy" | "medium" | "hard"
     }
     CompositeTypes: {
       [_ in never]: never

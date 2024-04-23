@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes'
 import React from 'react'
 
 type PlaygroundProps = {
-  code?: string
+  code: string | null
   language: string
 }
 
@@ -22,7 +22,7 @@ const Playground: React.FC<PlaygroundProps> = ({ code, language }) => {
         <Editor
           className="overflow-hidden"
           height={'90vh'}
-          value={code}
+          value={code || ''}
           language={language}
           theme={theme === 'dark' ? 'vs-dark' : theme}
           defaultLanguage="typescript"

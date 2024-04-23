@@ -1,12 +1,14 @@
 import React from 'react'
 import { Badge } from '../../../../components/ui/badge'
 import { CircleCheckBig } from 'lucide-react'
-import { Example, Problem } from '../../stores/problem-types'
+import { Example } from '../../stores/problem-types'
+import { TSBProblem } from '../../../../supabase/squash-types'
+import { problemsStore } from '../../stores/problems'
 
 type DescriptionsPageProps = {
   children?: React.ReactNode
   title: string
-  problem: Problem
+  problem: TSBProblem
 }
 const ExampleBlock = ({
   example,
@@ -29,7 +31,7 @@ const ExampleBlock = ({
         </div>
 
         <div>
-          <strong>Output:</strong> {output}
+          <strong>Output:</strong> {output?.toString()}
         </div>
         <div>
           {example.explaination ? (
@@ -43,11 +45,20 @@ const ExampleBlock = ({
     </div>
   )
 }
+
+const getProblemLocally = (name: string) => {
+  const found = problemsStore[name]
+  if (found) {
+    return found
+  }
+  return null
+}
 const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
   title,
   children,
   problem
 }) => {
+  const problemLocalInfor = getProblemLocally(problem.name || '')
   return (
     <div className="rounded-md relative w-full h-full flex flex-col border overflow-hidden p-2 overflow-y-scroll">
       <span className="font-medium text-2xl mb-4">{title}</span>
@@ -62,11 +73,13 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
           className="w-full h-full felx flex-col gap-4"
           data-track-load="description_content"
         >
-          {problem.description}
+          {problem.descriptions?.map((desc, i) => {
+            return <p key={i}>{desc}</p>
+          })}
 
           <br />
 
-          {problem.examples.map((example, index) => {
+          {problemLocalInfor?.examples.map((example, index) => {
             return (
               <ExampleBlock key={example.id} example={example} index={index} />
             )
@@ -75,10 +88,14 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
           <p>&nbsp;</p>
           <strong>Constraints:</strong>
           <ul className="list-disc">
-            {problem.constraints.map(cons => {
+            {problem.constraints?.map((cons, i) => {
               return (
-                <li className="mb-2" key={cons.id}>
-                  {cons.cons}
+                <li
+                  className="mb-2"
+                  key={i}
+                  dangerouslySetInnerHTML={{ __html: cons }}
+                >
+                  {/* {cons} */}
                 </li>
               )
             })}
@@ -86,6 +103,14 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
         </div>
         {children}
       </section>
+      <p className="mt-4">Categories: </p>
+      <div className="mt-2 flex items-center justify-start gap-4">
+        {problem.categories?.map(cate => (
+          <Badge key={cate} variant="secondary">
+            {cate}
+          </Badge>
+        ))}
+      </div>
     </div>
   )
 }

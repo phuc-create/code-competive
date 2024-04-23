@@ -1,5 +1,4 @@
 import React from 'react'
-import { Example } from '../../stores/problem-types'
 import {
   Tabs,
   TabsContent,
@@ -7,13 +6,26 @@ import {
   TabsTrigger
 } from '../../../../components/ui/tabs'
 import { Input } from '../../../../components/ui/input'
+import { problemsStore } from '../../stores/problems'
+import { Button } from '../../../../components/ui/button'
 
 type TestCasesPageProps = {
-  cases: Example[]
+  name: string | null
+  // cases: Example[]
 }
 
-const TestCasesPage: React.FC<TestCasesPageProps> = ({ cases }) => {
-  // const cases =
+const getProblemLocally = (name: string) => {
+  const found = problemsStore[name]
+  if (found) {
+    return found
+  }
+  return null
+}
+
+const TestCasesPage: React.FC<TestCasesPageProps> = ({ name }) => {
+  const cases = getProblemLocally(name || '')?.examples || []
+  if (!cases.length) return null
+
   return (
     <div className="rounded-md relative w-full h-full border overflow-hidden p-4">
       <Tabs defaultValue={cases[0].id}>
@@ -37,13 +49,21 @@ const TestCasesPage: React.FC<TestCasesPageProps> = ({ cases }) => {
               {testcases.map(testcase => (
                 <div key={testcase.id} className="flex flex-col">
                   <span>{testcase.varName} = </span>
-                  <Input disabled value={testcase.input?.toString()} />
+                  <Input
+                    disabled
+                    value={testcase.input?.toString()}
+                    className="truncate overflow-hidden text-nowrap text-ellipsis"
+                  />
                 </div>
               ))}
             </TabsContent>
           )
         })}
       </Tabs>
+      <div className="absolute bottom-4 right-4 flex gap-4">
+        <Button>Run</Button>
+        <Button>Submit</Button>
+      </div>
     </div>
   )
 }
