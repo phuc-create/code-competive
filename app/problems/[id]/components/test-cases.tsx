@@ -23,7 +23,7 @@ const getProblemLocally = (name: string) => {
 }
 
 const TestCasesPage: React.FC<TestCasesPageProps> = ({ name }) => {
-  const cases = getProblemLocally(name || '')?.examples || []
+  const cases = getProblemLocally(name || '')?.testcases || []
   if (!cases.length) return null
 
   return (
@@ -38,17 +38,17 @@ const TestCasesPage: React.FC<TestCasesPageProps> = ({ name }) => {
         </TabsList>
 
         {cases.map(c => {
-          const { var_name, input } = c
-          const testcases = var_name.map((varName, i) => ({
+          const { input } = c
+          const testcases = Object.entries(input).map(([el, v], i) => ({
             id: i,
-            varName,
-            input: input[i]
+            name: el,
+            input: v
           }))
           return (
             <TabsContent key={c.id} value={c.id}>
               {testcases.map(testcase => (
                 <div key={testcase.id} className="flex flex-col">
-                  <span>{testcase.varName} = </span>
+                  <span>{testcase.name} = </span>
                   <Input
                     disabled
                     value={testcase.input?.toString()}

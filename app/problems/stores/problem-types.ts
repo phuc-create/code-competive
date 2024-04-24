@@ -8,11 +8,11 @@ export type InAndOut =
   | boolean
   | null
   | undefined
+  | { [key: string]: InAndOut }
 
-export type Example = {
+export type TestCases = {
   id: string
-  var_name: string[]
-  input: InAndOut[]
+  input: { [key: string]: InAndOut }
   output: InAndOut
   explaination?: string
 }
@@ -26,7 +26,7 @@ export type Problem = {
   number: number // problem number
   title: string // name of problems
   description: string[] | string | React.ReactNode // description of problems
-  examples: Example[] // aslo known as test cases
+  testcases: TestCases[] // aslo known as test cases
   constraints: Constraints[] // also known as limitation of function
   templateCode: string // template to write code
   handleFunction: ((...params: InAndOut[]) => InAndOut) | string // user solution

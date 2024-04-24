@@ -1,7 +1,7 @@
 import React from 'react'
 import { Badge } from '../../../../components/ui/badge'
 import { CircleCheckBig } from 'lucide-react'
-import { Example } from '../../stores/problem-types'
+import { TestCases } from '../../stores/problem-types'
 import { TSBProblem } from '../../../../supabase/squash-types'
 import { problemsStore } from '../../stores/problems'
 
@@ -14,11 +14,11 @@ const ExampleBlock = ({
   example,
   index
 }: {
-  example: Example
+  example: TestCases
   index: number
 }) => {
-  const { var_name, input, output } = example
-  const inputPartern = var_name.map((varName, i) => `${varName} = ${input[i]}`)
+  const { input, output } = example
+  const inputPartern = Object.entries(input).map(([el, v]) => `${el} = ${v}`)
   return (
     <div className="mb-2">
       <p>
@@ -79,7 +79,7 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
 
           <br />
 
-          {problemLocalInfor?.examples.map((example, index) => {
+          {problemLocalInfor?.testcases.map((example, index) => {
             return (
               <ExampleBlock key={example.id} example={example} index={index} />
             )

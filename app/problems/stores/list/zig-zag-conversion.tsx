@@ -1,4 +1,4 @@
-import { Constraints, Example, InAndOut, Problem } from '../problem-types'
+import { Constraints, TestCases, InAndOut, Problem } from '../problem-types'
 const problemDescription = (
   <>
     <p>
@@ -28,23 +28,20 @@ const problemDescription = (
   </>
 )
 
-const problemExamples: Example[] = [
+const problemExamples: TestCases[] = [
   {
     id: 'ex-1',
-    var_name: ['s', 'numRows'],
-    input: ['PAYPALISHIRING', 3],
+    input: { s: 'PAYPALISHIRING', numRows: 3 },
     output: 'PAHNAPLSIIGYIR'
   },
   {
     id: 'ex-2',
-    var_name: ['s', 'numRows'],
-    input: ['PAYPALISHIRING', 4],
+    input: { s: 'PAYPALISHIRING', numRows: 4 },
     output: 'PINALSIGYAHRPI'
   },
   {
     id: 'ex-3',
-    var_name: ['s', 'numRows'],
-    input: ['A', 1],
+    input: { s: 'A', numRows: 1 },
     output: 'A'
   }
 ]
@@ -76,7 +73,7 @@ export const zig_zag_conversion_problem: Problem = {
   number: 1,
   title: 'Zig Zag Conversion',
   description: problemDescription,
-  examples: problemExamples,
+  testcases: problemExamples,
   constraints: problemConstraints,
   templateCode: problemTemplate,
   handleFunction: '',
