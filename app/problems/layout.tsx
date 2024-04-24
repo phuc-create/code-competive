@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ProblemContextProvider } from './context'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,9 +11,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <div>
-      <ProblemContextProvider>{children}</ProblemContextProvider>
-    </div>
-  )
+  return <>{children}</>
 }

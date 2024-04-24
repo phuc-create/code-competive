@@ -1,14 +1,12 @@
+'use client'
 import React from 'react'
 import { Badge } from '../../../../components/ui/badge'
 import { CircleCheckBig } from 'lucide-react'
 import { TestCases } from '../../stores/problem-types'
-import { TSBProblem } from '../../../../supabase/squash-types'
-import { problemsStore } from '../../stores/problems'
+import { useProblem } from '../context'
 
 type DescriptionsPageProps = {
   children?: React.ReactNode
-  title: string
-  problem: TSBProblem
 }
 const ExampleBlock = ({
   example,
@@ -46,22 +44,14 @@ const ExampleBlock = ({
   )
 }
 
-const getProblemLocally = (name: string) => {
-  const found = problemsStore[name]
-  if (found) {
-    return found
-  }
-  return null
-}
-const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
-  title,
-  children,
-  problem
-}) => {
-  const problemLocalInfor = getProblemLocally(problem.name || '')
+const DescriptionsPage: React.FC<DescriptionsPageProps> = ({ children }) => {
+  const { problem, problemLocal } = useProblem()
+  if (!problem || !problemLocal) return null
   return (
     <div className="rounded-md relative w-full h-full flex flex-col border overflow-hidden p-2 overflow-y-scroll">
-      <span className="font-medium text-2xl mb-4">{title}</span>
+      <span className="font-medium text-2xl mb-4">
+        {problem.number + '. ' + problem.title}
+      </span>
       <div className="w-full flex items-center justify-start mb-3">
         <Badge variant={problem.level} className="mr-4">
           <span className="capitalize">{problem.level}</span>
@@ -79,7 +69,7 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
 
           <br />
 
-          {problemLocalInfor?.testcases.map((example, index) => {
+          {problemLocal?.testcases.map((example, index) => {
             return (
               <ExampleBlock key={example.id} example={example} index={index} />
             )

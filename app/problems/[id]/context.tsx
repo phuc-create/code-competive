@@ -1,11 +1,18 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react'
-import { problemsStore } from './stores/problems'
-import { InAndOut, Problem, Result } from './stores/problem-types'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { Problem, InAndOut, Result } from '../stores/problem-types'
+import { problemsStore } from '../stores/problems'
+import { createSupabaseBrowerClient } from '../../../supabase/supabaseClient'
+import { TSBProblem } from '../../../supabase/squash-types'
 interface ProblemContextProviderProps {
+  params: {
+    id: string
+  }
   children?: React.ReactNode
 }
 type ProblemCtx = {
+  problem: TSBProblem | null
+  problemLocal: Problem | null
   codeValue: string
   handleChangeCodeValue: (value?: string) => void
   getProblemLocally: (name: string) => Problem | null
@@ -19,13 +26,34 @@ type ProblemCtx = {
 const ProblemCtx = createContext<ProblemCtx | null>(null)
 
 export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
+  params,
   children
 }) => {
+  const [problem, setProblem] = useState<TSBProblem | null>(null)
+  const [problemLocal, setProblemLocal] = useState<Problem | null>(null)
   const [codeValue, setCodeValue] = useState('')
   const [results, setResults] = useState<Result[]>([])
-  if (!ProblemCtx) {
-    throw Error('Must be within the context')
-  }
+
+  useEffect(() => {
+    const getProblemBrowser = async () => {
+      const supabase = createSupabaseBrowerClient()
+      const { data: problem, error } = await supabase
+        .from('problems')
+        .select('*')
+        .eq('name', params.id)
+        .maybeSingle()
+      if (problem) {
+        setProblem(problem)
+        setCodeValue(problem?.template_code || '')
+        const problemLocal = getProblemLocally(problem.name || '')
+        if (problemLocal) {
+          setProblemLocal(problemLocal)
+        }
+      }
+    }
+    getProblemBrowser()
+  }, [params.id])
+
   const handleChangeCodeValue = (value?: string) => {
     setCodeValue(() => value || '')
   }
@@ -52,6 +80,8 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
   return (
     <ProblemCtx.Provider
       value={{
+        problem,
+        problemLocal,
         codeValue,
         handleChangeCodeValue,
         getProblemLocally,

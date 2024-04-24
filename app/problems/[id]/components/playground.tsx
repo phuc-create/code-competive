@@ -1,18 +1,17 @@
 'use client'
+import React from 'react'
 import { Editor } from '@monaco-editor/react'
 import { Code2 } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import React, { useState } from 'react'
-import { useProblem } from '../../context'
+import { useProblem } from '../context'
 
 type PlaygroundProps = {
-  code: string | null
   language: string
 }
 
-const Playground: React.FC<PlaygroundProps> = ({ code, language }) => {
+const Playground: React.FC<PlaygroundProps> = ({ language }) => {
   const { theme } = useTheme()
-  const { handleChangeCodeValue } = useProblem()
+  const { codeValue, handleChangeCodeValue } = useProblem()
   return (
     <div className="rounded-md relative w-full h-full border overflow-hidden">
       <div className="relative h-9 w-full border-b">
@@ -24,7 +23,7 @@ const Playground: React.FC<PlaygroundProps> = ({ code, language }) => {
         <Editor
           className="overflow-hidden"
           height={'90vh'}
-          value={code || ''}
+          value={codeValue}
           language={language}
           onChange={handleChangeCodeValue}
           theme={theme === 'dark' ? 'vs-dark' : theme}
