@@ -19,45 +19,12 @@ type ProblemPageProps = {
     id: string
   }
 }
-// export const generateStaticParams = async () => {
-//   const problems = Object.keys(problemsBasepathMock).map(p => ({
-//     id: p
-//   }))
-
-//   return problems
-// }
-
-// const getProblem = async (name: string) => {
-//   const supabase = createSupabaseBrowerClient()
-//   const { data: problem, error } = await supabase
-//     .from('problems')
-//     .select('*')
-//     .eq('name', name)
-//     .maybeSingle()
-
-//   // The return value is *not* serialized
-//   // You can return Date, Map, Set, etc.
-
-//   if (!problem) {
-//     // This will activate the closest `error.js` Error Boundary
-//     return { problem: null }
-//   }
-
-//   return {
-//     problem
-//   }
-// }
 
 const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = async ({
   params
 }) => {
-  console.log(params.id)
-  // const [userProfile, setUserProfile] = useState<User | null>()
-  // const [problem, setProblem] = useState<TSBProblem | null>(null)
-  // const [loading, setLoading] = useState(true)
   const { user } = await getUserCredentials()
   const problem = await getProblem(params.id)
-  console.log(problem)
 
   if (!problem) {
     return notFound()

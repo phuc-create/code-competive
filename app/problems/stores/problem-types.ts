@@ -21,6 +21,14 @@ export type Constraints = {
   id: string
   cons: React.ReactNode
 }
+
+export type Result = {
+  case: number | string
+  input: { [key: string]: InAndOut }
+  output: InAndOut
+  expected: InAndOut
+  success: boolean
+}
 export type Problem = {
   id: string // unique ID of problems
   number: number // problem number
@@ -29,7 +37,7 @@ export type Problem = {
   testcases: TestCases[] // aslo known as test cases
   constraints: Constraints[] // also known as limitation of function
   templateCode: string // template to write code
-  handleFunction: ((...params: InAndOut[]) => InAndOut) | string // user solution
+  handleFunction: (cb: (...arg0: InAndOut[]) => InAndOut) => Result[] // user solution
   starterFunctionName: string // function required name
   numberOfSolutions?: number
   numberOfUserCompleted?: number

@@ -1,4 +1,11 @@
-import { Constraints, TestCases, InAndOut, Problem } from '../problem-types'
+import {
+  Constraints,
+  TestCases,
+  InAndOut,
+  Problem,
+  Result
+} from '../problem-types'
+
 const problemDescription = (
   <>
     <p>
@@ -30,10 +37,21 @@ const problemTestcases: TestCases[] = [
   }
 ]
 
-const handleTestSolution = (cb: (...arg0: InAndOut[]) => InAndOut) => {
-  const results = []
-
-  return
+const handleTestSolution = (
+  cb: (...arg0: InAndOut[]) => InAndOut
+): Result[] => {
+  const results: Result[] = []
+  for (const c of problemTestcases) {
+    const result = cb(...Object.values(c.input))
+    results.push({
+      case: c.id,
+      input: c.input,
+      output: result,
+      expected: c.output,
+      success: result === c.output
+    })
+  }
+  return results
 }
 
 const problemConstraints: Constraints[] = [
@@ -63,7 +81,7 @@ export const starter_problem: Problem = {
   testcases: problemTestcases,
   constraints: problemConstraints,
   templateCode: problemTemplate,
-  handleFunction: '',
+  handleFunction: handleTestSolution,
   starterFunctionName: 'containNumber',
   level: 'easy'
 }

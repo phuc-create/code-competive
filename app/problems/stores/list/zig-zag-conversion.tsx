@@ -1,4 +1,10 @@
-import { Constraints, TestCases, InAndOut, Problem } from '../problem-types'
+import {
+  Constraints,
+  TestCases,
+  InAndOut,
+  Problem,
+  Result
+} from '../problem-types'
 const problemDescription = (
   <>
     <p>
@@ -28,7 +34,7 @@ const problemDescription = (
   </>
 )
 
-const problemExamples: TestCases[] = [
+const problemTestcases: TestCases[] = [
   {
     id: 'ex-1',
     input: { s: 'PAYPALISHIRING', numRows: 3 },
@@ -45,7 +51,20 @@ const problemExamples: TestCases[] = [
     output: 'A'
   }
 ]
-
+const handleTestSolution = (cb: (...arg0: InAndOut[]) => InAndOut) => {
+  const results: Result[] = []
+  for (const c of problemTestcases) {
+    const result = cb(...Object.values(c.input))
+    results.push({
+      case: c.id,
+      input: c.input,
+      output: result,
+      expected: c.output,
+      success: result === c.output
+    })
+  }
+  return results
+}
 const problemConstraints: Constraints[] = [
   {
     id: 'cons-1',
@@ -73,10 +92,10 @@ export const zig_zag_conversion_problem: Problem = {
   number: 1,
   title: 'Zig Zag Conversion',
   description: problemDescription,
-  testcases: problemExamples,
+  testcases: problemTestcases,
   constraints: problemConstraints,
   templateCode: problemTemplate,
-  handleFunction: '',
+  handleFunction: handleTestSolution,
   starterFunctionName: 'convert',
   level: 'medium'
 }

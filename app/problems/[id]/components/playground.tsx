@@ -2,7 +2,8 @@
 import { Editor } from '@monaco-editor/react'
 import { Code2 } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import React from 'react'
+import React, { useState } from 'react'
+import { useProblem } from '../../context'
 
 type PlaygroundProps = {
   code: string | null
@@ -11,6 +12,7 @@ type PlaygroundProps = {
 
 const Playground: React.FC<PlaygroundProps> = ({ code, language }) => {
   const { theme } = useTheme()
+  const { handleChangeCodeValue } = useProblem()
   return (
     <div className="rounded-md relative w-full h-full border overflow-hidden">
       <div className="relative h-9 w-full border-b">
@@ -24,6 +26,7 @@ const Playground: React.FC<PlaygroundProps> = ({ code, language }) => {
           height={'90vh'}
           value={code || ''}
           language={language}
+          onChange={handleChangeCodeValue}
           theme={theme === 'dark' ? 'vs-dark' : theme}
           defaultLanguage="typescript"
           options={{

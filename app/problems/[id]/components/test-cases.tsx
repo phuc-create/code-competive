@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import {
   Tabs,
   TabsContent,
@@ -6,26 +7,29 @@ import {
   TabsTrigger
 } from '../../../../components/ui/tabs'
 import { Input } from '../../../../components/ui/input'
-import { problemsStore } from '../../stores/problems'
 import { Button } from '../../../../components/ui/button'
+import { useProblem } from '../../context'
 
 type TestCasesPageProps = {
   name: string | null
   // cases: Example[]
 }
 
-const getProblemLocally = (name: string) => {
-  const found = problemsStore[name]
-  if (found) {
-    return found
-  }
-  return null
-}
-
 const TestCasesPage: React.FC<TestCasesPageProps> = ({ name }) => {
-  const cases = getProblemLocally(name || '')?.testcases || []
-  if (!cases.length) return null
-
+  const { codeValue, getProblemLocally, results, handleProcessSolution } =
+    useProblem()
+  const problem = getProblemLocally(name || '')
+  if (!problem?.testcases.length) return null
+  const cases = problem?.testcases
+  console.log(results)
+  const handleSubmitSolution = () => {
+    console.log(codeValue)
+    handleProcessSolution(
+      codeValue,
+      problem.handleFunction,
+      problem.starterFunctionName
+    )
+  }
   return (
     <div className="rounded-md relative w-full h-full border overflow-hidden p-4">
       <Tabs defaultValue={cases[0].id}>
@@ -61,7 +65,7 @@ const TestCasesPage: React.FC<TestCasesPageProps> = ({ name }) => {
         })}
       </Tabs>
       <div className="absolute bottom-4 right-4 flex gap-4">
-        <Button>Run</Button>
+        <Button onClick={handleSubmitSolution}>Run</Button>
         <Button>Submit</Button>
       </div>
     </div>
