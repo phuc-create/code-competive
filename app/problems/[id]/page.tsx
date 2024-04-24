@@ -61,7 +61,7 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
           <ResizablePanel className="border-none">
             <ResizablePanelGroup direction="vertical">
               <ResizablePanel className="p-2">
-                <Playground language={'typescript'} />
+                <Playground language={'javascript'} />
               </ResizablePanel>
               <ResizableHandle withHandle className="bg-transparent" />
               <ResizablePanel className="p-2">

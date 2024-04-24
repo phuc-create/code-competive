@@ -70,8 +70,12 @@ const problemConstraints: Constraints[] = [
     )
   }
 ]
-const problemTemplate = `const containNumber = (s: string) => {
-  // write your code here
+const problemTemplate = `/**
+* s: string
+* output: boolean
+*/
+const containNumber = (s) => {
+ // write your code here
 }`
 export const starter_problem: Problem = {
   id: 'starter-problem',
