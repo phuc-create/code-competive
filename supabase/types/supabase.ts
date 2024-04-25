@@ -60,6 +60,7 @@ export type Database = {
       problems: {
         Row: {
           categories: string[] | null
+          completed: number | null
           constraints: string | null
           created_at: string
           descriptions: string | null
@@ -76,6 +77,7 @@ export type Database = {
         }
         Insert: {
           categories?: string[] | null
+          completed?: number | null
           constraints?: string | null
           created_at?: string
           descriptions?: string | null
@@ -92,6 +94,7 @@ export type Database = {
         }
         Update: {
           categories?: string[] | null
+          completed?: number | null
           constraints?: string | null
           created_at?: string
           descriptions?: string | null

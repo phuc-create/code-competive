@@ -33,6 +33,7 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
   const [problemLocal, setProblemLocal] = useState<Problem | null>(null)
   const [codeValue, setCodeValue] = useState('')
   const [results, setResults] = useState<Result[]>([])
+  const [resultsSubmission, setResultsSubmission] = useState<Result[]>()
 
   useEffect(() => {
     const getProblemBrowser = async () => {

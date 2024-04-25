@@ -31,15 +31,16 @@ export type Result = {
 }
 export type Problem = {
   id: string // unique ID of problems
-  number: number // problem number
-  title: string // name of problems
-  description: string[] | string | React.ReactNode // description of problems
+  // number: number // problem number
+  // title: string // name of problems
+  // description: string[] | string | React.ReactNode // description of problems
   testcases: TestCases[] // aslo known as test cases
-  constraints: Constraints[] // also known as limitation of function
-  templateCode: string // template to write code
+  // constraints: Constraints[] // also known as limitation of function
+  // templateCode: string // template to write code
   handleFunction: (cb: (...arg0: InAndOut[]) => InAndOut) => Result[] // user solution
-  starterFunctionName: string // function required name
-  numberOfSolutions?: number
+  handleSubmitSolution: (cb: (...arg0: InAndOut[]) => InAndOut) => Result[] // user solution
+  // starterFunctionName: string // function required name
+  // numberOfSolutions?: number
   numberOfUserCompleted?: number
-  level: 'easy' | 'medium' | 'hard'
+  // level: 'easy' | 'medium' | 'hard'
 }

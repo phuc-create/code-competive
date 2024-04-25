@@ -1,5 +1,5 @@
 import { starter_problem } from './list/starter-problem'
-import { zig_zag_conversion_problem } from './list/zig-zag-conversion'
+import { zig_zag_conversion_problem } from './list/zig-zag-conversion/zig-zag-conversion'
 import { Problem } from './problem-types'
 type ProblemBasePathMock = {
   [key: string]: Problem
