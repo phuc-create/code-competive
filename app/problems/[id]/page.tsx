@@ -14,6 +14,7 @@ import { Icons } from '../../../icons/icons'
 import { ProblemContextProvider } from './context'
 import { createSupabaseBrowerClient } from '../../../supabase/supabaseClient'
 import { User } from '@supabase/supabase-js'
+import ButtonHandle from './components/buttons-handle'
 
 type ProblemPageProps = {
   params: {
@@ -49,22 +50,23 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
   }
   return (
     <ProblemContextProvider params={params}>
-      <div className="h-full w-full px-10">
+      <div className="h-full w-full px-5">
+        <ButtonHandle />
         <ResizablePanelGroup
           direction="horizontal"
           className="w-full border-none"
         >
-          <ResizablePanel className="h-[calc(100vh-74px)] p-2">
+          <ResizablePanel className="h-[calc(100vh-60px)] py-2 pr-2">
             <DescriptionsPage />
           </ResizablePanel>
           <ResizableHandle withHandle className="bg-transparent" />
           <ResizablePanel className="border-none">
             <ResizablePanelGroup direction="vertical">
-              <ResizablePanel className="p-2">
+              <ResizablePanel className="py-2 pl-2">
                 <Playground language={'javascript'} />
               </ResizablePanel>
               <ResizableHandle withHandle className="bg-transparent" />
-              <ResizablePanel className="p-2">
+              <ResizablePanel className="py-2 pl-2">
                 <TestCasesPage />
               </ResizablePanel>
             </ResizablePanelGroup>

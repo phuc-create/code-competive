@@ -74,10 +74,6 @@ const TestCasesPage: React.FC<TestCasesPageProps> = () => {
           )}
         </Tabs>
       </div>
-      <div className="absolute bottom-4 right-4 flex gap-4">
-        <Button onClick={handleSubmitSolution}>Run</Button>
-        <Button>Submit</Button>
-      </div>
     </div>
   )
 }

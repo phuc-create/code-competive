@@ -10,5 +10,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <div className="m-0 flex h-full flex-col gap-y-4 p-0">{children}</div>
+  return <div className="m-0 flex h-full flex-col gap-y-2 p-0">{children}</div>
 }

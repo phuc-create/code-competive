@@ -42,6 +42,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "problem_overview_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "public_problem_overview_problem_id_fkey"
             columns: ["problem_id"]
             isOneToOne: true
@@ -107,6 +114,7 @@ export type Database = {
           id: string
           name: string | null
           picture: string | null
+          role: Database["public"]["Enums"]["roles"] | null
           user_id: string | null
         }
         Insert: {
@@ -114,6 +122,7 @@ export type Database = {
           id?: string
           name?: string | null
           picture?: string | null
+          role?: Database["public"]["Enums"]["roles"] | null
           user_id?: string | null
         }
         Update: {
@@ -121,6 +130,7 @@ export type Database = {
           id?: string
           name?: string | null
           picture?: string | null
+          role?: Database["public"]["Enums"]["roles"] | null
           user_id?: string | null
         }
         Relationships: [
@@ -142,6 +152,7 @@ export type Database = {
     }
     Enums: {
       levels: "easy" | "medium" | "hard"
+      roles: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never

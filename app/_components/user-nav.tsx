@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { createSupabaseBrowerClient } from '../../supabase/supabaseClient'
 import { TSBUser } from '../../supabase/squash-types'
+import Link from 'next/link'
 
 interface UserNavProps {
   user: User | null
@@ -80,7 +81,11 @@ export const UserNav: React.FC<UserNavProps> = ({
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
+          {userProfile?.role === 'admin' && (
+            <DropdownMenuItem>
+              <Link href="/add-problem">Add problem</Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
