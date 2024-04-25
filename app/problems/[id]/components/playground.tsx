@@ -27,7 +27,7 @@ const Playground: React.FC<PlaygroundProps> = ({ language }) => {
           language={language}
           onChange={handleChangeCodeValue}
           theme={theme === 'dark' ? 'vs-dark' : theme}
-          defaultLanguage="typescript"
+          defaultLanguage="javascript"
           options={{
             fontSize: 14,
             hover: { enabled: false },
