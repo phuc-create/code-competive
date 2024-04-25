@@ -20,7 +20,7 @@ const TestcasesBoard: React.FC = () => {
         return (
           <TabsContent key={c.case} value={c.case.toString()}>
             <div className="flex flex-col">
-              <span>{varFormat} = </span>
+              <span>{varFormat}</span>
               <Input
                 disabled
                 value={inputFormat.toString()}

@@ -7,7 +7,6 @@ import {
   TabsTrigger
 } from '../../../../components/ui/tabs'
 import { Input } from '../../../../components/ui/input'
-import { Button } from '../../../../components/ui/button'
 import { useProblem } from '../context'
 import TestcasesBoard from './test-cases-board'
 import TestCasesTab from './test-cases-tab'
@@ -17,19 +16,10 @@ type TestCasesPageProps = {
 }
 
 const TestCasesPage: React.FC<TestCasesPageProps> = () => {
-  const { problem, problemLocal, codeValue, results, handleProcessSolution } =
-    useProblem()
+  const { problemLocal, results } = useProblem()
   if (!problemLocal?.testcases.length) return null
   const cases = problemLocal?.testcases
 
-  const handleSubmitSolution = () => {
-    console.log(codeValue)
-    handleProcessSolution(
-      codeValue,
-      problemLocal.handleFunction,
-      problem?.starter_func_name || ''
-    )
-  }
   return (
     <div className="relative h-full w-full">
       <div className="relative h-full w-full overflow-hidden overflow-y-scroll rounded-md border p-4">
