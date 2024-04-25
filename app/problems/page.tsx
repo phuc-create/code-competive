@@ -31,7 +31,7 @@ const ProblemsPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[calc(100vh-72px)] w-full">
+      <div className="flex h-[calc(100vh-72px)] w-full items-center justify-center">
         <Icons.spinner />
       </div>
     )

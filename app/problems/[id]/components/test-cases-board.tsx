@@ -25,20 +25,20 @@ const TestcasesBoard: React.FC = () => {
                 <Input
                   disabled
                   value={testcase.input?.toString()}
-                  className={`truncate overflow-hidden text-nowrap text-ellipsis ${success ? 'border-green-600' : 'border-destructive'}`}
+                  className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
                 />
                 <Seperator className="mt-4" />
-                <span className="mt-3 mb-2">Expected:</span>
+                <span className="mb-2 mt-3">Expected:</span>
                 <Input
                   disabled
                   value={expected?.toString()}
-                  className={`truncate overflow-hidden text-nowrap text-ellipsis ${success ? 'border-green-600' : 'border-destructive'}`}
+                  className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
                 />
-                <span className="mt-3 mb-2">Got: </span>
+                <span className="mb-2 mt-3">Got: </span>
                 <Input
                   disabled
                   value={output + ''}
-                  className={`truncate overflow-hidden text-nowrap text-ellipsis ${success ? 'border-green-600' : 'border-destructive'}`}
+                  className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
                 />
               </div>
             ))}

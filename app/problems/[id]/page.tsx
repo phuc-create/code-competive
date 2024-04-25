@@ -38,7 +38,7 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[calc(100vh-72px)] w-full">
+      <div className="flex h-[calc(100vh-72px)] w-full items-center justify-center">
         <Icons.spinner />
       </div>
     )
@@ -49,12 +49,12 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
   }
   return (
     <ProblemContextProvider params={params}>
-      <div className="px-10 w-full h-full">
+      <div className="h-full w-full px-10">
         <ResizablePanelGroup
           direction="horizontal"
           className="w-full border-none"
         >
-          <ResizablePanel className="p-2 h-[calc(100vh-74px)]">
+          <ResizablePanel className="h-[calc(100vh-74px)] p-2">
             <DescriptionsPage />
           </ResizablePanel>
           <ResizableHandle withHandle className="bg-transparent" />

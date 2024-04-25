@@ -48,19 +48,19 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({ children }) => {
   const { problem, problemLocal } = useProblem()
   if (!problem || !problemLocal) return null
   return (
-    <div className="rounded-md relative w-full h-full flex flex-col border overflow-hidden p-2 overflow-y-scroll">
-      <span className="font-medium text-2xl mb-4">
+    <div className="relative flex h-full w-full flex-col overflow-hidden overflow-y-scroll rounded-md border p-2">
+      <span className="mb-4 text-2xl font-medium">
         {problem.number + '. ' + problem.title}
       </span>
-      <div className="w-full flex items-center justify-start mb-3">
+      <div className="mb-3 flex w-full items-center justify-start">
         <Badge variant={problem.level} className="mr-4">
           <span className="capitalize">{problem.level}</span>
         </Badge>
-        <CircleCheckBig className="w-5 h-5 font-bold" color="green" />
+        <CircleCheckBig className="h-5 w-5 font-bold" color="green" />
       </div>
       <section className="h-auto">
         <div
-          className="w-full h-full felx flex-col gap-4"
+          className="felx h-full w-full flex-col gap-4"
           data-track-load="description_content"
         >
           {problem.descriptions?.map((desc, i) => {

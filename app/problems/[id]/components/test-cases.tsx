@@ -31,13 +31,13 @@ const TestCasesPage: React.FC<TestCasesPageProps> = () => {
     )
   }
   return (
-    <div className="relative w-full h-full">
-      <div className="rounded-md relative w-full h-full border p-4 overflow-hidden overflow-y-scroll">
+    <div className="relative h-full w-full">
+      <div className="relative h-full w-full overflow-hidden overflow-y-scroll rounded-md border p-4">
         <Tabs defaultValue={cases[0].id}>
           <TabsList className="bg-transparent">
             {!results.length ? (
               cases.map((c, i) => (
-                <TabsTrigger key={c.id} value={c.id} className="border mr-4">
+                <TabsTrigger key={c.id} value={c.id} className="mr-4 border">
                   Case {i + 1}
                 </TabsTrigger>
               ))
@@ -62,7 +62,7 @@ const TestCasesPage: React.FC<TestCasesPageProps> = () => {
                       <Input
                         disabled
                         value={testcase.input?.toString()}
-                        className="truncate overflow-hidden text-nowrap text-ellipsis"
+                        className="overflow-hidden truncate text-ellipsis text-nowrap"
                       />
                     </div>
                   ))}

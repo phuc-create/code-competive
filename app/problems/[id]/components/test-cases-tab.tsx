@@ -9,7 +9,7 @@ const TestCasesTab: React.FC = () => {
     <TabsTrigger
       key={c.case}
       value={c.case.toString()}
-      className={`border mr-4 ${c.success ? 'border-green-500' : 'border-destructive'}`}
+      className={`mr-4 border ${c.success ? 'border-green-500' : 'border-destructive'}`}
     >
       Case {i + 1}
     </TabsTrigger>

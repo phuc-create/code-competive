@@ -13,10 +13,10 @@ const Playground: React.FC<PlaygroundProps> = ({ language }) => {
   const { theme } = useTheme()
   const { codeValue, handleChangeCodeValue } = useProblem()
   return (
-    <div className="rounded-md relative w-full h-full border overflow-hidden">
+    <div className="relative h-full w-full overflow-hidden rounded-md border">
       <div className="relative h-9 w-full border-b">
-        <div className="h-9 absolute top-0 left-0 w-full capitalize flex items-center justify-start p-2">
-          <Code2 className="w-5 h-5 mr-2" /> {language}
+        <div className="absolute left-0 top-0 flex h-9 w-full items-center justify-start p-2 capitalize">
+          <Code2 className="mr-2 h-5 w-5" /> {language}
         </div>
       </div>
       <div className="relative overflow-hidden">

@@ -34,7 +34,7 @@ const TableColumnHeader = <TData, TValue>({
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
             <span>{title}</span>
-            <ArrowUpDown className="h-4 w-4 ml-2" />
+            <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
