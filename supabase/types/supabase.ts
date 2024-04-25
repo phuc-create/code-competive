@@ -60,9 +60,9 @@ export type Database = {
       problems: {
         Row: {
           categories: string[] | null
-          constraints: string[] | null
+          constraints: string | null
           created_at: string
-          descriptions: string[] | null
+          descriptions: string | null
           dislikes: number | null
           id: number
           level: Database["public"]["Enums"]["levels"] | null
@@ -76,9 +76,9 @@ export type Database = {
         }
         Insert: {
           categories?: string[] | null
-          constraints?: string[] | null
+          constraints?: string | null
           created_at?: string
-          descriptions?: string[] | null
+          descriptions?: string | null
           dislikes?: number | null
           id?: number
           level?: Database["public"]["Enums"]["levels"] | null
@@ -92,9 +92,9 @@ export type Database = {
         }
         Update: {
           categories?: string[] | null
-          constraints?: string[] | null
+          constraints?: string | null
           created_at?: string
-          descriptions?: string[] | null
+          descriptions?: string | null
           dislikes?: number | null
           id?: number
           level?: Database["public"]["Enums"]["levels"] | null

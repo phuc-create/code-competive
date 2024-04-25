@@ -49,23 +49,21 @@ const TestCasesPage: React.FC<TestCasesPageProps> = () => {
           {!results.length ? (
             cases.map(c => {
               const { input } = c
-              const testcases = Object.entries(input).map(([el, v], i) => ({
-                id: i,
-                name: el,
-                input: v
-              }))
+              const varFormat = Object.keys(input)
+                .map(k => `${k} =`)
+                .join(', ')
+              const inputFormat = Object.values(input).join(', ')
+
               return (
                 <TabsContent key={c.id} value={c.id}>
-                  {testcases.map(testcase => (
-                    <div key={testcase.id} className="flex flex-col">
-                      <span>{testcase.name} = </span>
-                      <Input
-                        disabled
-                        value={testcase.input?.toString()}
-                        className="overflow-hidden truncate text-ellipsis text-nowrap"
-                      />
-                    </div>
-                  ))}
+                  <div className="flex flex-col">
+                    <span>{varFormat}</span>
+                    <Input
+                      disabled
+                      value={inputFormat.toString()}
+                      className="overflow-hidden truncate text-ellipsis text-nowrap"
+                    />
+                  </div>
                 </TabsContent>
               )
             })

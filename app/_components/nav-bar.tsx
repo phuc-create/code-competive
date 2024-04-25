@@ -9,7 +9,7 @@ import { getUserCredentials } from '../../supabase/requests/user'
 const NavBar = async () => {
   const { user } = await getUserCredentials()
   return (
-    <div className="flex items-center justify-between px-2 md:px-12 md:pt-2">
+    <div className="flex items-center justify-between px-2 pt-2 md:px-12">
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
       <div className="flex justify-center gap-8">
         <Link

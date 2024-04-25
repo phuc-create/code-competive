@@ -63,10 +63,9 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({ children }) => {
           className="felx h-full w-full flex-col gap-4"
           data-track-load="description_content"
         >
-          {problem.descriptions?.map((desc, i) => {
-            return <p key={i}>{desc}</p>
-          })}
-
+          <div
+            dangerouslySetInnerHTML={{ __html: problem.descriptions || '' }}
+          ></div>
           <br />
 
           {problemLocal?.testcases.map((example, index) => {
@@ -77,19 +76,10 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({ children }) => {
 
           <p>&nbsp;</p>
           <strong>Constraints:</strong>
-          <ul className="list-disc">
-            {problem.constraints?.map((cons, i) => {
-              return (
-                <li
-                  className="mb-2"
-                  key={i}
-                  dangerouslySetInnerHTML={{ __html: cons }}
-                >
-                  {/* {cons} */}
-                </li>
-              )
-            })}
-          </ul>
+          <ul
+            className="list-disc"
+            dangerouslySetInnerHTML={{ __html: problem.constraints || '' }}
+          ></ul>
         </div>
         {children}
       </section>

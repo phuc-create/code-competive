@@ -19,7 +19,7 @@ const AuthPage: React.FC<AuthPageProps> = () => {
   }, [user, router])
   if (loading) {
     return (
-      <div className="flex m-auto w-full h-full items-center justify-center">
+      <div className="m-auto flex h-full w-full items-center justify-center">
         <Icons.spinner />
       </div>
     )
@@ -28,7 +28,7 @@ const AuthPage: React.FC<AuthPageProps> = () => {
     console.log(error)
   }
   return (
-    <div className="flex items-center justify-center flex-col h-[calc(100vh - 5rem)] pointer-events-none select-none">
+    <div className="h-[calc(100vh - 5rem)] pointer-events-none flex select-none flex-col items-center justify-center">
       Welcome to Stuck Overflow! Have a good coding.
     </div>
   )

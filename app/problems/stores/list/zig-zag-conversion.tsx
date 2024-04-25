@@ -73,10 +73,10 @@ const problemConstraints: Constraints[] = [
   {
     id: 'cons-2',
     cons: (
-      <>
+      <div>
         <code>s</code> consists of English letters (lower-case and upper-case),{' '}
         <code>','</code> and <code>'.'</code>
-      </>
+      </div>
     )
   },
   {
@@ -84,7 +84,7 @@ const problemConstraints: Constraints[] = [
     cons: <code>1 &lt;= numRows &lt;= 1000</code>
   }
 ]
-const problemTemplate = `const convert = (s:string, numRows: number) => {
+const problemTemplate = `const convert = (s, numRows) => {
   // write your code here
 }`
 export const zig_zag_conversion_problem: Problem = {

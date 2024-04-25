@@ -37,7 +37,7 @@ const ProblemsPage: React.FC = () => {
     )
   }
   return (
-    <div className="flex-1 flex-col items-center justify-between px-12">
+    <div className="flex-1 flex-col items-center justify-between px-2 md:px-12">
       <DataTable data={problems || []} columns={columns || []} />
     </div>
   )

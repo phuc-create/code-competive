@@ -17,7 +17,7 @@ const getMockListProblem = async () => {
 export default async function Home() {
   const problems = await getMockListProblem()
   return (
-    <main className="min-h-screen flex-1 flex-col items-center justify-between px-12">
+    <main className="min-h-screen flex-1 flex-col items-center justify-between px-2 md:px-12">
       <DataTable data={problems} columns={columns} />
     </main>
   )

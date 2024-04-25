@@ -12,36 +12,34 @@ const TestcasesBoard: React.FC = () => {
     <>
       {results.map(c => {
         const { input, expected, output, success } = c
-        const testcases = Object.entries(input).map(([el, v], i) => ({
-          id: i,
-          name: el,
-          input: v
-        }))
+        const varFormat = Object.keys(input)
+          .map(k => `${k} =`)
+          .join(', ')
+        const inputFormat = Object.values(input).join(', ')
+
         return (
           <TabsContent key={c.case} value={c.case.toString()}>
-            {testcases.map(testcase => (
-              <div key={testcase.id} className="flex flex-col">
-                <span>{testcase.name} = </span>
-                <Input
-                  disabled
-                  value={testcase.input?.toString()}
-                  className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
-                />
-                <Seperator className="mt-4" />
-                <span className="mb-2 mt-3">Expected:</span>
-                <Input
-                  disabled
-                  value={expected?.toString()}
-                  className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
-                />
-                <span className="mb-2 mt-3">Got: </span>
-                <Input
-                  disabled
-                  value={output + ''}
-                  className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
-                />
-              </div>
-            ))}
+            <div className="flex flex-col">
+              <span>{varFormat} = </span>
+              <Input
+                disabled
+                value={inputFormat.toString()}
+                className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
+              />
+              <Seperator className="mt-4" />
+              <span className="mb-2 mt-3">Expected:</span>
+              <Input
+                disabled
+                value={expected?.toString()}
+                className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
+              />
+              <span className="mb-2 mt-3">Got: </span>
+              <Input
+                disabled
+                value={output + ''}
+                className={`overflow-hidden truncate text-ellipsis text-nowrap ${success ? 'border-green-600' : 'border-destructive'}`}
+              />
+            </div>
           </TabsContent>
         )
       })}
