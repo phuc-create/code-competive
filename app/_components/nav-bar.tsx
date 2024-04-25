@@ -11,18 +11,18 @@ const NavBar = async () => {
   return (
     <div className="flex items-center justify-between px-2 md:px-12 md:pt-2">
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
-      <div className="flex gap-8 justify-center">
+      <div className="flex justify-center gap-8">
         <Link
           href="/"
-          className="flex items-center font-semibold justify-center p-3 rounded-md gap-1 bg-primary/100"
+          className="flex items-center justify-center gap-1 rounded-md bg-primary/100 p-3 text-sm font-semibold"
         >
           <span className="text-red-700 ">Solve </span>{' '}
-          <span className="dark:text-black text-white">It!</span>
+          <span className="text-white dark:text-black">It!</span>
         </Link>
-        <div className="flex gap-2 justify-center items-center">
+        <div className="flex items-center justify-center gap-2">
           <Link
             href="/problems"
-            className="flex items-center justify-center p-2 rounded-md transition ease-in-out duration-300 hover:bg-primary/5"
+            className="flex items-center justify-center rounded-md p-2 text-sm transition duration-300 ease-in-out hover:bg-primary/5"
           >
             Problems
           </Link>
