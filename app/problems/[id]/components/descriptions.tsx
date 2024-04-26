@@ -66,7 +66,7 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
       <ScrollArea>
         <Tabs
           defaultValue="description"
-          className="relative left-0 top-0 w-full pr-2"
+          className="relative left-0 top-0 pr-2"
           value={tab}
           onValueChange={onTabChange}
         >

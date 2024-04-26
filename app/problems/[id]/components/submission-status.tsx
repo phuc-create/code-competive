@@ -5,31 +5,45 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '../../../../components/ui/accordion'
+import { useProblem } from '../context'
 
 const SubmissionStatus = () => {
+  const { resultsSubmission } = useProblem()
+  if (!resultsSubmission.length)
+    return (
+      <div className="mx-auto my-0 flex flex-col justify-center">
+        Result not found
+      </div>
+    )
   return (
-    <Accordion type="single" collapsible className="w-full">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It comes with default styles that matches the other
-          components&apos; aesthetic.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It&apos;s animated by default, but you can disable it if you
-          prefer.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+    <div>
+      <Accordion
+        type="single"
+        collapsible
+        className="grid grid-cols-[100%] gap-2"
+      >
+        {resultsSubmission.map(item => {
+          return (
+            <AccordionItem
+              key={item.case}
+              value={item.case.toString()}
+              className={`relative rounded-md border px-4 ${item.success ? 'border-green-500' : 'border-destructive'}`}
+            >
+              <AccordionTrigger className="">
+                test case{' '}
+                {item.case + ' ' + (item.success ? 'PASSED' : 'FAILED')}
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col break-all">
+                <span className="mb-4">
+                  Expected: {item.expected?.toString()}
+                </span>
+                <span>Got: {item.output?.toString()}</span>
+              </AccordionContent>
+            </AccordionItem>
+          )
+        })}
+      </Accordion>
+    </div>
   )
 }
 
