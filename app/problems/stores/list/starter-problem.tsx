@@ -40,7 +40,9 @@ const handleTestSolution = (
   return results
 }
 
-const handleSubmitSolution = (cb: (...arg0: InAndOut[]) => InAndOut) => {
+const handleSubmitSolution = (
+  cb: (...arg0: InAndOut[]) => InAndOut
+): Result[] => {
   const results: Result[] = []
   for (const c of problemSubmitCases) {
     const result = cb(...Object.values(c.input))

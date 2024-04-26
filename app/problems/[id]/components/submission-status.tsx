@@ -37,7 +37,7 @@ const SubmissionStatus = () => {
                 <span className="mb-4">
                   Expected: {item.expected?.toString()}
                 </span>
-                <span>Got: {item.output?.toString()}</span>
+                <span>Got: {item.output + ''}</span>
               </AccordionContent>
             </AccordionItem>
           )
