@@ -23,8 +23,13 @@ type ProblemPageProps = {
 }
 
 const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
+  const [tab, setTab] = useState('description')
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<User | null>()
+  const onTabChange = (value: string) => {
+    setTab(value)
+  }
+
   useEffect(() => {
     const getUserCredentials = async () => {
       const supabase = createSupabaseBrowerClient()
@@ -51,13 +56,13 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
   return (
     <ProblemContextProvider params={params}>
       <div className="h-full w-full px-5">
-        <ButtonHandle />
+        <ButtonHandle onTabChange={onTabChange} />
         <ResizablePanelGroup
           direction="horizontal"
           className="w-full border-none"
         >
           <ResizablePanel className="h-[calc(100vh-60px)] py-2 pr-2">
-            <DescriptionsPage />
+            <DescriptionsPage tab={tab} onTabChange={onTabChange} />
           </ResizablePanel>
           <ResizableHandle withHandle className="bg-transparent" />
           <ResizablePanel className="border-none">

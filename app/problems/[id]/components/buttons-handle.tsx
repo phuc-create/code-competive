@@ -4,14 +4,16 @@ import { Button } from '../../../../components/ui/button'
 import { CloudUploadIcon, PlayIcon } from 'lucide-react'
 import { useProblem } from '../context'
 
-const ButtonHandle: React.FC = () => {
+interface ButtonHandleProps {
+  onTabChange: (tab: string) => void
+}
+const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
   const { problem, problemLocal, codeValue, handleProcessSolution } =
     useProblem()
 
   if (!problemLocal?.testcases.length) return null
-  console.log(problemLocal)
+
   const handleSubmitSolution = () => {
-    console.log(codeValue)
     handleProcessSolution(
       codeValue,
       problemLocal.handleFunction,

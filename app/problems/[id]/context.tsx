@@ -76,10 +76,10 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
     handleFunc: (cb: (...arg0: InAndOut[]) => InAndOut) => Result[],
     funcName: string
   ) => {
-    const cb = eval(`(function () {
+    const cb = new Function(`
       ${solution}
       return ${funcName}
-    })()`)
+    `)()
     const rs = handleFunc(cb as (...arg0: InAndOut[]) => InAndOut)
     setResults(rs)
   }
@@ -89,10 +89,10 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
     handleFunc: (cb: (...arg0: InAndOut[]) => InAndOut) => Result[],
     funcName: string
   ) => {
-    const cb = eval(`(function () {
-      ${solution}
-      return ${funcName}
-    })()`)
+    const cb = new Function(`
+    ${solution}
+    return ${funcName}
+  `)()
     const rs = handleFunc(cb as (...arg0: InAndOut[]) => InAndOut)
     setResultsSubmission(rs)
   }
