@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { TabsTrigger } from '../../../../components/ui/tabs'
 import { useProblem } from '../context'

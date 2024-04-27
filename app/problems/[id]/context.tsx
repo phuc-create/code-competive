@@ -4,6 +4,7 @@ import { Problem, InAndOut, Result } from '../stores/problem-types'
 import { problemsStore } from '../stores/problems'
 import { createSupabaseBrowerClient } from '../../../supabase/supabaseClient'
 import { TSBProblem } from '../../../supabase/squash-types'
+import { getUserClient } from '../../../supabase/requests/user'
 interface ProblemContextProviderProps {
   params: {
     id: string
@@ -44,10 +45,12 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
   useEffect(() => {
     const getProblemBrowser = async () => {
       const supabase = createSupabaseBrowerClient()
+      const { data } = await getUserClient()
       const { data: problem, error } = await supabase
         .from('problems')
-        .select('*')
+        .select('*,problem_overview ( * )')
         .eq('name', params.id)
+        .eq('problem_overview.user_id', data?.id || '')
         .maybeSingle()
       if (problem) {
         setProblem(problem)

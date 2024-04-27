@@ -16,7 +16,11 @@ const SubmissionStatus = () => {
       </div>
     )
   return (
-    <div>
+    <div className="flex flex-col">
+      <span className="my-4">
+        Test cases: {resultsSubmission.filter(v => v.success).length}/
+        {resultsSubmission.length} passed
+      </span>
       <Accordion
         type="single"
         collapsible

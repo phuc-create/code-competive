@@ -16,7 +16,7 @@ export type Database = {
           id: number
           liked: boolean | null
           problem_id: number | null
-          solutions: string[] | null
+          solutions: string | null
           status: string | null
           user_id: string | null
         }
@@ -26,7 +26,7 @@ export type Database = {
           id?: number
           liked?: boolean | null
           problem_id?: number | null
-          solutions?: string[] | null
+          solutions?: string | null
           status?: string | null
           user_id?: string | null
         }
@@ -36,7 +36,7 @@ export type Database = {
           id?: number
           liked?: boolean | null
           problem_id?: number | null
-          solutions?: string[] | null
+          solutions?: string | null
           status?: string | null
           user_id?: string | null
         }
@@ -44,14 +44,14 @@ export type Database = {
           {
             foreignKeyName: "problem_overview_user_id_fkey"
             columns: ["user_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "public_problem_overview_problem_id_fkey"
             columns: ["problem_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "problems"
             referencedColumns: ["id"]
           },
@@ -151,7 +151,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_completed: {
+        Args: {
+          problem_id: number
+          x: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       levels: "easy" | "medium" | "hard"
