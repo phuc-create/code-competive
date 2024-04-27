@@ -28,7 +28,7 @@ const ProblemsPage: React.FC = () => {
       )
       `
         )
-        .eq('problem_overiew.user_id', data?.id || '')
+        .eq('problem_overview.user_id', data?.id || '')
       setProblems(problems)
     }
     getProblems()
@@ -44,7 +44,17 @@ const ProblemsPage: React.FC = () => {
   }
   return (
     <div className="flex-1 flex-col items-center justify-between px-2 md:px-12">
-      <DataTable data={problems || []} columns={columns || []} />
+      <DataTable
+        data={
+          problems?.map(p => ({
+            ...p,
+            status: p.problem_overview.find(v => v.status === 'solved')
+              ? 'solved'
+              : 'unsolved'
+          })) || []
+        }
+        columns={columns || []}
+      />
     </div>
   )
 }

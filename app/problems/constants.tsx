@@ -12,8 +12,8 @@ export const statuses = [
     icon: QuestionMarkCircledIcon
   },
   {
-    value: 'todo',
-    label: 'Todo',
+    value: 'unsolved',
+    label: 'Unsolved',
     icon: CircleIcon
   },
   {
@@ -22,8 +22,8 @@ export const statuses = [
     icon: StopwatchIcon
   },
   {
-    value: 'done',
-    label: 'Done',
+    value: 'solved',
+    label: 'Solved',
     icon: CheckCircledIcon
   },
   {
