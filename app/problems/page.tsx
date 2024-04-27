@@ -5,6 +5,7 @@ import { columns } from './components/problems-columns'
 import { TSBProblem } from '../../supabase/squash-types'
 import { Icons } from '../../icons/icons'
 import { createSupabaseBrowerClient } from '../../supabase/supabaseClient'
+import { getUserClient } from '../../supabase/requests/user'
 
 // type pageProps = {
 
@@ -16,14 +17,19 @@ const ProblemsPage: React.FC = () => {
   useEffect(() => {
     const getProblems = async () => {
       const supabase = createSupabaseBrowerClient()
-
-      const { data, error } = await supabase.from('problems').select(`
+      const { data } = await getUserClient()
+      const { data: problems, error } = await supabase
+        .from('problems')
+        .select(
+          `
       *,
       problem_overview (
         *
       )
-      `)
-      setProblems(data)
+      `
+        )
+        .eq('problem_overiew.user_id', data?.id || '')
+      setProblems(problems)
     }
     getProblems()
     setLoading(false)
