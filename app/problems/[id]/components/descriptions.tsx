@@ -1,7 +1,6 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import { Badge } from '../../../../components/ui/badge'
-import { CircleCheckBig } from 'lucide-react'
 import { TestCases } from '../../stores/problem-types'
 import { useProblem } from '../context'
 import { ScrollArea } from '../../../../components/ui/scroll-area'
@@ -12,6 +11,8 @@ import {
   TabsTrigger
 } from '../../../../components/ui/tabs'
 import SubmissionStatus from './submission-status'
+import { CheckCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
+import SolutionsPage from './solutions'
 
 type DescriptionsPageProps = {
   tab: string
@@ -70,9 +71,10 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
           value={tab}
           onValueChange={onTabChange}
         >
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="description">Description</TabsTrigger>
             <TabsTrigger value="submission">Submission</TabsTrigger>
+            <TabsTrigger value="solutions">Solutions</TabsTrigger>
           </TabsList>
           <TabsContent value="description">
             <span className="mb-4 text-2xl font-medium">
@@ -82,7 +84,11 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
               <Badge variant={problem.level} className="mr-4">
                 <span className="capitalize">{problem.level}</span>
               </Badge>
-              <CircleCheckBig className="h-5 w-5 font-bold" color="green" />
+              {problem.problem_overview.length ? (
+                <CheckCircledIcon className="h-5 w-5" color="green" />
+              ) : (
+                <StopwatchIcon />
+              )}
             </div>
             <section className="h-auto">
               <div
@@ -128,6 +134,9 @@ const DescriptionsPage: React.FC<DescriptionsPageProps> = ({
           </TabsContent>
           <TabsContent value="submission">
             <SubmissionStatus />
+          </TabsContent>
+          <TabsContent value="solutions">
+            <SolutionsPage />
           </TabsContent>
         </Tabs>
       </ScrollArea>

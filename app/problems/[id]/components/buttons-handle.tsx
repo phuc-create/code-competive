@@ -4,10 +4,8 @@ import { Button } from '../../../../components/ui/button'
 import { CloudUploadIcon, PlayIcon } from 'lucide-react'
 import { useProblem } from '../context'
 import { createSupabaseBrowerClient } from '../../../../supabase/supabaseClient'
-import {
-  getUserClient,
-  getUserCredentialsClient
-} from '../../../../supabase/requests/user'
+import { getUserClient } from '../../../../supabase/requests/user'
+import { toast } from 'sonner'
 
 interface ButtonHandleProps {
   onTabChange: (tab: string) => void
@@ -17,6 +15,7 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
     problem,
     problemLocal,
     codeValue,
+    results,
     resultsSubmission,
     handleProcessSolution,
     handleProcessSubmission
@@ -40,18 +39,16 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
     )
     onTabChange('submission')
   }
+  const disableSubmitBtn =
+    !results.length && results.filter(r => r.success).length !== results.length
   useEffect(() => {
     if (
       resultsSubmission.length &&
       resultsSubmission.filter(v => v.success).length ===
         resultsSubmission.length
     ) {
-      console.log(
-        resultsSubmission,
-        resultsSubmission.filter(v => v.success === true).length ===
-          resultsSubmission.length
-      )
       const handleSave = async () => {
+        toast('Submitting...', { duration: 3000, id: 'submit-solution-event' })
         const supabase = createSupabaseBrowerClient()
         try {
           // Begin database transaction
@@ -95,11 +92,14 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
           console.log(
             'Solution submitted and problem completed count updated successfully!'
           )
-
+          toast.dismiss('submit-solution-event')
+          toast.success('Solution submitted', { duration: 3000 })
           // Optionally return the inserted solution ID for further use
           return insertedSolutionId
         } catch (error) {
           console.error('Error submitting solution:', error)
+          toast.error('An error occured: ' + error, { duration: 3000 })
+
           throw error // Re-throw the error for handling in the calling code
         }
       }
@@ -113,7 +113,7 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
         <PlayIcon className="mr-2 h-4 w-4" />
         Run
       </Button>
-      <Button onClick={handleSubmitSolution}>
+      <Button onClick={handleSubmitSolution} disabled={!disableSubmitBtn}>
         <CloudUploadIcon className="mr-2 h-5 w-5" />
         Submit
       </Button>
