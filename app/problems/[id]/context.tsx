@@ -28,7 +28,8 @@ type ProblemCtx = {
     solution: string,
     handleFunc: (cb: (...arg0: InAndOut[]) => InAndOut) => Result[],
     funcName: string
-  ) => void
+  ) => Result[]
+  handleChangeTracker: () => void
 }
 const ProblemCtx = createContext<ProblemCtx | null>(null)
 
@@ -41,6 +42,7 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
   const [codeValue, setCodeValue] = useState('')
   const [results, setResults] = useState<Result[]>([])
   const [resultsSubmission, setResultsSubmission] = useState<Result[]>([])
+  const [tracker, setTracker] = useState(false)
 
   useEffect(() => {
     const getProblemBrowser = async () => {
@@ -62,7 +64,8 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
       }
     }
     getProblemBrowser()
-  }, [params.id])
+  }, [params.id, tracker])
+  const handleChangeTracker = () => setTracker(pre => !pre)
 
   const handleChangeCodeValue = (value?: string) => {
     setCodeValue(() => value || '')
@@ -85,6 +88,7 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
     `)()
     const rs = handleFunc(cb as (...arg0: InAndOut[]) => InAndOut)
     setResults(rs)
+    return rs
   }
 
   const handleProcessSubmission = (
@@ -98,6 +102,7 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
   `)()
     const rs = handleFunc(cb as (...arg0: InAndOut[]) => InAndOut)
     setResultsSubmission(rs)
+    return rs
   }
 
   return (
@@ -111,7 +116,8 @@ export const ProblemContextProvider: React.FC<ProblemContextProviderProps> = ({
         results,
         resultsSubmission,
         handleProcessSolution,
-        handleProcessSubmission
+        handleProcessSubmission,
+        handleChangeTracker
       }}
     >
       {children}

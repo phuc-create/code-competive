@@ -18,7 +18,8 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
     results,
     resultsSubmission,
     handleProcessSolution,
-    handleProcessSubmission
+    handleProcessSubmission,
+    handleChangeTracker
   } = useProblem()
 
   const handleTestSolution = () => {
@@ -32,21 +33,13 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
 
   const handleSubmitSolution = () => {
     if (!problemLocal) return
-    handleProcessSubmission(
+    const rs = handleProcessSubmission(
       codeValue,
       problemLocal?.handleSubmitSolution,
       problem?.starter_func_name || ''
     )
     onTabChange('submission')
-  }
-  const disableSubmitBtn =
-    !results.length && results.filter(r => r.success).length !== results.length
-  useEffect(() => {
-    if (
-      resultsSubmission.length &&
-      resultsSubmission.filter(v => v.success).length ===
-        resultsSubmission.length
-    ) {
+    if (rs.length && rs.filter(v => v.success).length === rs.length) {
       const handleSave = async () => {
         toast('Submitting...', { duration: 3000, id: 'submit-solution-event' })
         const supabase = createSupabaseBrowerClient()
@@ -95,8 +88,10 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
           toast.dismiss('submit-solution-event')
           toast.success('Solution submitted', { duration: 3000 })
           // Optionally return the inserted solution ID for further use
+          handleChangeTracker()
           return insertedSolutionId
         } catch (error) {
+          handleChangeTracker()
           console.error('Error submitting solution:', error)
           toast.error('An error occured: ' + error, { duration: 3000 })
 
@@ -105,7 +100,9 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
       }
       handleSave()
     }
-  }, [codeValue, problem?.id, resultsSubmission])
+  }
+  const disableSubmitBtn =
+    results.length && results.filter(r => r.success).length === results.length
 
   return (
     <div className="relavite flex items-center justify-center gap-1 rounded-md border p-1">
