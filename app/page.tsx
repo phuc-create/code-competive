@@ -21,7 +21,7 @@ export default async function Home() {
     }
   }`
   const codeMask2 = `function isThisEvenEnglish(text) {
-    constleetspeak = {
+    const leetspeak = {
       a: "4", e: "3",
       o: "0", l: "1",
     };
