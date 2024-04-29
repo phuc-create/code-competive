@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button } from '../../../../components/ui/button'
 import { CloudUploadIcon, PlayIcon } from 'lucide-react'
 import { useProblem } from '../context'
@@ -16,7 +16,6 @@ const ButtonHandle: React.FC<ButtonHandleProps> = ({ onTabChange }) => {
     problemLocal,
     codeValue,
     results,
-    resultsSubmission,
     handleProcessSolution,
     handleProcessSubmission,
     handleChangeTracker

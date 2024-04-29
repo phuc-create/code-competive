@@ -55,13 +55,13 @@ const PlaygroundWorkspacePage: React.FC<ProblemPageProps> = ({ params }) => {
   }
   return (
     <ProblemContextProvider params={params}>
-      <div className="h-full w-full px-5">
+      <div className="h-[calc(100vh-60px)] w-full px-5">
         <ButtonHandle onTabChange={onTabChange} />
         <ResizablePanelGroup
           direction="horizontal"
           className="w-full border-none"
         >
-          <ResizablePanel className="h-[calc(100vh-60px)] py-2 pr-2">
+          <ResizablePanel className="py-2 pr-2">
             <DescriptionsPage tab={tab} onTabChange={onTabChange} />
           </ResizablePanel>
           <ResizableHandle withHandle className="bg-transparent" />
