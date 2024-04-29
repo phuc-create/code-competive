@@ -1,6 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 ## Solve it Page
-<img width="1505" alt="image" src="https://github.com/phuc-create/code-competive/assets/70959734/3b7b1d26-6d4c-42d4-9bab-1661eafa5bef">
+![image](https://github.com/phuc-create/code-competive/assets/70959734/c93eb014-388b-4179-8fa9-96e3cf753b86)
+
 
 ## Getting Started
 
